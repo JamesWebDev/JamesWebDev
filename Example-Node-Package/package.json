@@ -1,0 +1,45 @@
+{
+  "name": "@jameswebdev/example-node-package",
+  "version": "1.0.0",
+  "description": "an example of how to create a node package to be used by a node website",
+  "main": "dist/example-node-package.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JamesWebDev",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/angular": "^1.6.14",
+    "@types/jquery": "^2.0.41",
+    "@types/node": "^7.0.13",
+    "awesome-typescript-loader": "latest",
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "base64-font-loader": "latest",
+    "clean-webpack-plugin": "latest",
+    "copy-webpack-plugin": "latest",
+    "css-loader": "latest",
+    "expose-loader": "latest",
+    "extract-text-webpack-plugin": "latest",
+    "file-loader": "latest",
+    "fs-extra": "latest",
+    "image-webpack-loader": "latest",
+    "imports-loader": "latest",
+    "ng-cache-loader": "latest",
+    "node-sass": "latest",
+    "replace-in-file": "latest",
+    "sass-loader": "latest",
+    "style-loader": "latest",
+    "tslib": "^1.6.0",
+    "typescript": "latest",
+    "url-loader": "latest",
+    "webpack": "latest",
+    "webpack-cleanup-plugin": "latest",
+    "webpack-node-externals": "latest"
+  },
+  "dependencies": {
+    "angular": "latest",
+    "jquery": "latest"
+  }
+}

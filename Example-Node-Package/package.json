@@ -1,5 +1,9 @@
 {
   "name": "@jameswebdev/example-node-package",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesWebDev/JamesWebDev.git"
+  },
   "version": "1.0.0",
   "description": "an example of how to create a node package to be used by a node website",
   "main": "dist/example-node-package.js",

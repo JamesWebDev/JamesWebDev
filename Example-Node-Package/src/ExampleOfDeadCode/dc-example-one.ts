@@ -3,7 +3,7 @@ export class DeadCodeExpectItToBeRemoved {
     constructor(msg:string){
         this.message = msg;
     }
-    logTheClassesProperties(){
+    logTheClassesProperties =()=>{
         console.log(this.message);
     }
 }

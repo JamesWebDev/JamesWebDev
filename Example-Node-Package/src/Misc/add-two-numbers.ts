@@ -1,4 +1,4 @@
-export class TreeShakeThisAway{
+export class AddTwoNumbers{
     public numberone:number;
     public numbertwo:number;
     public result:number
@@ -8,10 +8,10 @@ export class TreeShakeThisAway{
         this.addThemTogether();
         this.logTheResult();
     }
-    addThemTogether =()=>{
+    addThemTogether(){
         this.result = this.numberone + this.numbertwo
     }
-    logTheResult =()=>{
+    logTheResult(){
         console.log(this.result)
     }
 }

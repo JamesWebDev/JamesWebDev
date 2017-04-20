@@ -5,8 +5,14 @@ const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const NodeExternals = require('webpack-node-externals');
+const WebpackVisualizer = require('webpack-visualizer-plugin');
 
+const env = process.env.NODE_ENV || 'development';
+const isProd = (['production','stage'].includes(env));
+const isHot = (env === 'hot');
+const MakeUglifyJsReadable = true;
+console.log(`isProd = ${isProd}`);
+console.log(`isHot = ${isHot}`);
 
 const path = require('path');
 const glob = require("glob");
@@ -19,14 +25,11 @@ const DIST = path.resolve( __dirname, './dist' );
 const globoptions = {
     cwd:"./src"
 }
-let indexFile = glob.sync("./index.ts", globoptions);
+//let indexFile = glob.sync("./index.ts", globoptions);
 let styleFile = glob.sync("./core.module.scss", globoptions);
-let buildFiles = styleFile.concat(indexFile)//array order extremely important, only last file is exported, and thus importable.
+let buildFiles = glob.sync("./**/*.ts", globoptions)
 
-
-console.log(indexFile,styleFile)
-
-
+console.log(buildFiles)
 
 
 module.exports = {
@@ -35,7 +38,7 @@ module.exports = {
     context: __dirname + "/src", //The base directory (absolute path!) for resolving the entry option. If output.pathinfo is set, the included pathinfo is shortened to this directory.
     entry:
     {
-        "example-node-package": "./index.ts"
+        "client": buildFiles
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files
@@ -43,8 +46,7 @@ module.exports = {
         libraryTarget:'umd',
         library: "example-node-package", 
         umdNamedDefine: true //Uses file names instead of numbers, making webpacked file more readable
-    }, 
-    externals: [NodeExternals()], 
+    },     
     resolve: { 
         extensions: ['.ts','.js','.css', '.scss'],
         alias: {        
@@ -59,8 +61,8 @@ module.exports = {
         rules:[  
             {
                 test: /\.jsx?$/, //matches .js and .jsx files
-                loader: "babel-loader",
-                exclude: /(node_modules)/,
+                loader: "babel-loader",                
+                exclude: /(node_modules)/                
             },
             {
                 test: /\.html$/,
@@ -168,7 +170,8 @@ module.exports = {
         //This webpack plugin cleans up the extraneous files from the webpack's output path.
         //Use the exclude option if you want to keep files that are not webpack assets.
         //Basically it compares folder contents to emitted files, and removes old assets.        
-        new WebpackCleanupPlugin()        
+        new WebpackCleanupPlugin(),
+        new WebpackVisualizer({filename: '../WebpackVisualizer.html'})
     ],
     //Include polyfills or mocks for various node stuff
     node:
@@ -187,4 +190,22 @@ module.exports = {
         historyApiFallback: true
     },
     stats: { errorDetails: true }
+}
+
+// if process.env.NODE_ENV === 'production' add Uglify to the array of plugins
+if (isProd) {
+    //much slower build avoid when developing locally
+    module.exports.plugins.push(        
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: true,
+                dead_code: true
+            },
+            minimize: MakeUglifyJsReadable?false:true,
+            sourceMap: MakeUglifyJsReadable?true:false,
+            mangle: false,
+            beautify: MakeUglifyJsReadable?true:false,
+            preserveComments: MakeUglifyJsReadable?true:false
+        })
+    );
 }

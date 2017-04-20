@@ -78,6 +78,29 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "./ExampleOfDeadCode/dc-example-func.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TreeShakeThisFunctionAway = function (one, two) {
+    var _this = this;
+    this.addThemTogether = function () {
+        _this.result = _this.numberone + _this.numbertwo;
+    };
+    this.logTheResult = function () {
+        console.log(_this.result);
+    };
+    this.numberone = one;
+    this.numbertwo = two;
+    this.addThemTogether();
+    this.logTheResult();
+};
+
+
+/***/ }),
+
 /***/ "./ExampleOfDeadCode/dc-example-one.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -86,11 +109,12 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", { value: true });
 var DeadCodeExpectItToBeRemoved = (function () {
     function DeadCodeExpectItToBeRemoved(msg) {
+        var _this = this;
+        this.logTheClassesProperties = function () {
+            console.log(_this.message);
+        };
         this.message = msg;
     }
-    DeadCodeExpectItToBeRemoved.prototype.logTheClassesProperties = function () {
-        console.log(this.message);
-    };
     return DeadCodeExpectItToBeRemoved;
 }());
 exports.DeadCodeExpectItToBeRemoved = DeadCodeExpectItToBeRemoved;
@@ -106,20 +130,47 @@ exports.DeadCodeExpectItToBeRemoved = DeadCodeExpectItToBeRemoved;
 Object.defineProperty(exports, "__esModule", { value: true });
 var TreeShakeThisAway = (function () {
     function TreeShakeThisAway(one, two) {
+        var _this = this;
+        this.addThemTogether = function () {
+            _this.result = _this.numberone + _this.numbertwo;
+        };
+        this.logTheResult = function () {
+            console.log(_this.result);
+        };
         this.numberone = one;
         this.numbertwo = two;
         this.addThemTogether();
         this.logTheResult();
     }
-    TreeShakeThisAway.prototype.addThemTogether = function () {
-        this.result = this.numberone + this.numbertwo;
-    };
-    TreeShakeThisAway.prototype.logTheResult = function () {
-        console.log(this.result);
-    };
     return TreeShakeThisAway;
 }());
 exports.TreeShakeThisAway = TreeShakeThisAway;
+
+
+/***/ }),
+
+/***/ "./Misc/add-two-numbers.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var AddTwoNumbers = (function () {
+    function AddTwoNumbers(one, two) {
+        this.numberone = one;
+        this.numbertwo = two;
+        this.addThemTogether();
+        this.logTheResult();
+    }
+    AddTwoNumbers.prototype.addThemTogether = function () {
+        this.result = this.numberone + this.numbertwo;
+    };
+    AddTwoNumbers.prototype.logTheResult = function () {
+        console.log(this.result);
+    };
+    return AddTwoNumbers;
+}());
+exports.AddTwoNumbers = AddTwoNumbers;
 
 
 /***/ }),
@@ -135,6 +186,8 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__("./ExampleOfDeadCode/dc-example-one.ts"));
 __export(__webpack_require__("./ExampleOfDeadCode/dc-example-two.ts"));
+__export(__webpack_require__("./Misc/add-two-numbers.ts"));
+__export(__webpack_require__("./ExampleOfDeadCode/dc-example-func.ts"));
 
 
 /***/ })

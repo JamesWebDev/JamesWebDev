@@ -1,0 +1,17 @@
+//I haven't gotten this to work, but here it is for the future
+{
+  "presets": [
+    ["env", {
+        "targets": {
+            "browsers": [
+                "Chrome >= 52",
+                "FireFox >= 44",
+                "Safari >= 7",
+                "Explorer 11",
+                "last 4 Edge versions"
+            ]
+        },
+        "useBuiltIns": true
+    }]
+  ]
+}

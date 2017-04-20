@@ -5,11 +5,12 @@
     "url": "https://github.com/JamesWebDev/JamesWebDev.git"
   },
   "private": false,
-  "access":"public",
   "version": "1.0.0",
   "description": "an example of how to create a node website that uses a node package also written by you",
   "main": "index.js",
   "scripts": {
+    "pack": "cls&&webpack --config=webpack.config.js",
+    "pack-prod": "set NODE_ENV=production&&cls&&webpack --config=webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JamesWebDev",
@@ -19,8 +20,10 @@
     "@types/jquery": "^2.0.41",
     "@types/node": "^7.0.13",
     "awesome-typescript-loader": "latest",
-    "babel-core": "latest",
+    "babel-core": "^6.24.1",
     "babel-loader": "latest",
+    "babel-preset-env": "^1.4.0",
+    "babili-webpack-plugin": "^0.0.11",
     "base64-font-loader": "latest",
     "clean-webpack-plugin": "latest",
     "copy-webpack-plugin": "latest",
@@ -43,7 +46,9 @@
     "webpack-node-externals": "latest"
   },
   "dependencies": {
+    "@jameswebdev/example-node-package": "^1.0.0",
     "angular": "latest",
-    "jquery": "latest"
+    "jquery": "latest",
+    "webpack-visualizer-plugin": "^0.1.11"
   }
 }

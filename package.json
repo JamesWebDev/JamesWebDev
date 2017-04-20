@@ -1,0 +1,16 @@
+{
+  "name": "@jameswebdev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesWebDev/JamesWebDev.git"
+  },
+  "private": false,
+  "access":"public",
+  "version": "1.0.0",
+  "description": "an example of how to create a node package to be used by a node website",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JamesWebDev",
+  "license": "MIT"  
+}

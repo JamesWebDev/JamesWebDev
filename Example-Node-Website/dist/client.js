@@ -169,30 +169,70 @@ return /******/ (function(modules) { // webpackBootstrap
         /************************************************************************/
         /******/{
 
-            /***/"./ExampleOfDeadCode/dc-example-func.ts":
+            /***/"./Helpers/add-two-numbers.ts":
             /***/function (module, exports, __webpack_require__) {
 
                 "use strict";
 
                 Object.defineProperty(exports, "__esModule", { value: true });
-                exports.TreeShakeThisFunctionAway = function (one, two) {
-                    var _this = this;
-                    this.addThemTogether = function () {
-                        _this.result = _this.numberone + _this.numbertwo;
+                var AddTwoNumbers = function () {
+                    function AddTwoNumbers(one, two) {
+                        this.numberone = one;
+                        this.numbertwo = two;
+                        this.addThemTogether();
+                        this.logTheResult();
+                    }
+                    AddTwoNumbers.prototype.addThemTogether = function () {
+                        this.result = this.numberone + this.numbertwo;
                     };
-                    this.logTheResult = function () {
-                        console.log(_this.result);
+                    AddTwoNumbers.prototype.logTheResult = function () {
+                        console.log(this.result);
                     };
-                    this.numberone = one;
-                    this.numbertwo = two;
-                    this.addThemTogether();
-                    this.logTheResult();
+                    return AddTwoNumbers;
+                }();
+                exports.AddTwoNumbers = AddTwoNumbers;
+
+                /***/
+            },
+
+            /***/"./Helpers/string-extensions.ts":
+            /***/function (module, exports, __webpack_require__) {
+
+                "use strict";
+
+                var _this = this;
+                __webpack_require__("./Helpers/strings.d.ts");
+                String.prototype.right = function (numOfChars) {
+                    if (numOfChars === undefined || numOfChars >= this.length) {
+                        return this.toString();
+                    }
+                    return this.substring(this.length - numOfChars, this.length);
+                };
+                String.prototype.left = function (numOfChars) {
+                    if (numOfChars === undefined || numOfChars >= this.length) {
+                        return this.toString();
+                    }
+                    return this.substring(0, numOfChars);
+                };
+                String.prototype.orEmpty = function () {
+                    return _this || "";
+                };
+                function escapeRegExp(string) {
+                    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+                }
+                String.prototype.replaceAll = function (find, replace) {
+                    return this.replace(new RegExp(escapeRegExp(find), 'g'), replace);
                 };
 
                 /***/
             },
 
-            /***/"./ExampleOfDeadCode/dc-example-one.ts":
+            /***/"./Helpers/strings.d.ts":
+            /***/function (module, exports) {
+
+                /***/},
+
+            /***/"./TreeShake/deadCodeExpectItToBeRemoved.ts":
             /***/function (module, exports, __webpack_require__) {
 
                 "use strict";
@@ -213,7 +253,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 /***/
             },
 
-            /***/"./ExampleOfDeadCode/dc-example-two.ts":
+            /***/"./TreeShake/treeShakeThisAway.ts":
             /***/function (module, exports, __webpack_require__) {
 
                 "use strict";
@@ -240,28 +280,25 @@ return /******/ (function(modules) { // webpackBootstrap
                 /***/
             },
 
-            /***/"./Misc/add-two-numbers.ts":
+            /***/"./TreeShake/treeShakeThisFunctionAway.ts":
             /***/function (module, exports, __webpack_require__) {
 
                 "use strict";
 
                 Object.defineProperty(exports, "__esModule", { value: true });
-                var AddTwoNumbers = function () {
-                    function AddTwoNumbers(one, two) {
-                        this.numberone = one;
-                        this.numbertwo = two;
-                        this.addThemTogether();
-                        this.logTheResult();
-                    }
-                    AddTwoNumbers.prototype.addThemTogether = function () {
-                        this.result = this.numberone + this.numbertwo;
+                exports.TreeShakeThisFunctionAway = function (one, two) {
+                    var _this = this;
+                    this.addThemTogether = function () {
+                        _this.result = _this.numberone + _this.numbertwo;
                     };
-                    AddTwoNumbers.prototype.logTheResult = function () {
-                        console.log(this.result);
+                    this.logTheResult = function () {
+                        console.log(_this.result);
                     };
-                    return AddTwoNumbers;
-                }();
-                exports.AddTwoNumbers = AddTwoNumbers;
+                    this.numberone = one;
+                    this.numbertwo = two;
+                    this.addThemTogether();
+                    this.logTheResult();
+                };
 
                 /***/
             },
@@ -271,14 +308,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
                 "use strict";
 
-                function __export(m) {
-                    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-                }
                 Object.defineProperty(exports, "__esModule", { value: true });
-                __export(__webpack_require__("./ExampleOfDeadCode/dc-example-one.ts"));
-                __export(__webpack_require__("./ExampleOfDeadCode/dc-example-two.ts"));
-                __export(__webpack_require__("./Misc/add-two-numbers.ts"));
-                __export(__webpack_require__("./ExampleOfDeadCode/dc-example-func.ts"));
+                __webpack_require__("./Helpers/string-extensions.ts");
+                var deadCodeExpectItToBeRemoved_1 = __webpack_require__("./TreeShake/deadCodeExpectItToBeRemoved.ts");
+                exports.DeadCodeExpectItToBeRemoved = deadCodeExpectItToBeRemoved_1.DeadCodeExpectItToBeRemoved;
+                var treeShakeThisAway_1 = __webpack_require__("./TreeShake/treeShakeThisAway.ts");
+                exports.TreeShakeThisAway = treeShakeThisAway_1.TreeShakeThisAway;
+                var add_two_numbers_1 = __webpack_require__("./Helpers/add-two-numbers.ts");
+                exports.AddTwoNumbers = add_two_numbers_1.AddTwoNumbers;
+                var treeShakeThisFunctionAway_1 = __webpack_require__("./TreeShake/treeShakeThisFunctionAway.ts");
+                exports.TreeShakeThisFunctionAway = treeShakeThisFunctionAway_1.TreeShakeThisFunctionAway;
 
                 /***/
             }
@@ -290,6 +329,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
+/***/ "../../Example-TS-Module/string-extensions.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+///<reference path="./global.d.ts" />
+
+var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
+String.prototype.right = function (numOfChars) {
+    if (numOfChars === undefined || numOfChars >= this.length) {
+        return this.toString();
+    }
+    return this.substring(this.length - numOfChars, this.length);
+};
+String.prototype.left = function (numOfChars) {
+    if (numOfChars === undefined || numOfChars >= this.length) {
+        return this.toString();
+    }
+    return this.substring(0, numOfChars);
+};
+String.prototype.orEmpty = function () { return _this || ""; };
+String.prototype.replaceAll = function (find, replace) {
+    return this.replace(new RegExp(find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g'), replace);
+};
+
+
+/***/ }),
+
 /***/ "./index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -298,6 +365,9 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", { value: true });
 var example_node_package_1 = __webpack_require__("../../Example-Node-Package/dist/example-node-package.js");
 new example_node_package_1.AddTwoNumbers(1, 2);
+__webpack_require__("../../Example-TS-Module/string-extensions.ts");
+var x = "Hello World";
+console.log(x.left(5));
 
 
 /***/ }),

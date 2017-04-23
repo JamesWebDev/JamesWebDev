@@ -35,7 +35,8 @@ module.exports = {
     context: __dirname + "/src", //The base directory (absolute path!) for resolving the entry option. If output.pathinfo is set, the included pathinfo is shortened to this directory.
     entry:
     {
-        "example-node-package": "./index.ts"
+        "example-node-package": "./index.ts",
+        "string-extensions":"./Helpers/string-extensions.ts"
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files

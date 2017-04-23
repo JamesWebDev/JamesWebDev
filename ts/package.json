@@ -1,0 +1,23 @@
+{
+    "name": "@jameswebdev/ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JamesWebDev/JamesWebDev.git"
+    },
+    "private": false,
+    "access": "public",
+    "version": "1.0.001",
+    "description": "an example of how to create a node package with uncompiled ts files",
+    "scripts": {
+        "publish": "npm publish --access public",
+        "update": "npm version patch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "JamesWebDev",
+    "license": "MIT",
+    "devDependencies": {
+        "fs-extra": "^2.1.2",
+        "tslib": "^1.6.0",
+        "typescript": "latest"
+    }
+}

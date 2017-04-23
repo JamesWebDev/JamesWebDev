@@ -73,36 +73,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./Helpers/string-extensions.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./Helpers/add-two-numbers.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var AddTwoNumbers = (function () {
-    function AddTwoNumbers(one, two) {
-        this.numberone = one;
-        this.numbertwo = two;
-        this.addThemTogether();
-        this.logTheResult();
-    }
-    AddTwoNumbers.prototype.addThemTogether = function () {
-        this.result = this.numberone + this.numbertwo;
-    };
-    AddTwoNumbers.prototype.logTheResult = function () {
-        console.log(this.result);
-    };
-    return AddTwoNumbers;
-}());
-exports.AddTwoNumbers = AddTwoNumbers;
-
-
-/***/ }),
 
 /***/ "./Helpers/string-extensions.ts":
 /***/ (function(module, exports, __webpack_require__) {
@@ -139,98 +113,8 @@ String.prototype.replaceAll = function (find, replace) {
 
 
 
-/***/ }),
-
-/***/ "./TreeShake/deadCodeExpectItToBeRemoved.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var DeadCodeExpectItToBeRemoved = (function () {
-    function DeadCodeExpectItToBeRemoved(msg) {
-        var _this = this;
-        this.logTheClassesProperties = function () {
-            console.log(_this.message);
-        };
-        this.message = msg;
-    }
-    return DeadCodeExpectItToBeRemoved;
-}());
-exports.DeadCodeExpectItToBeRemoved = DeadCodeExpectItToBeRemoved;
-
-
-/***/ }),
-
-/***/ "./TreeShake/treeShakeThisAway.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var TreeShakeThisAway = (function () {
-    function TreeShakeThisAway(one, two) {
-        var _this = this;
-        this.addThemTogether = function () {
-            _this.result = _this.numberone + _this.numbertwo;
-        };
-        this.logTheResult = function () {
-            console.log(_this.result);
-        };
-        this.numberone = one;
-        this.numbertwo = two;
-        this.addThemTogether();
-        this.logTheResult();
-    }
-    return TreeShakeThisAway;
-}());
-exports.TreeShakeThisAway = TreeShakeThisAway;
-
-
-/***/ }),
-
-/***/ "./TreeShake/treeShakeThisFunctionAway.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TreeShakeThisFunctionAway = function (one, two) {
-    var _this = this;
-    this.addThemTogether = function () {
-        _this.result = _this.numberone + _this.numbertwo;
-    };
-    this.logTheResult = function () {
-        console.log(_this.result);
-    };
-    this.numberone = one;
-    this.numbertwo = two;
-    this.addThemTogether();
-    this.logTheResult();
-};
-
-
-/***/ }),
-
-/***/ "./index.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__("./Helpers/string-extensions.ts");
-var deadCodeExpectItToBeRemoved_1 = __webpack_require__("./TreeShake/deadCodeExpectItToBeRemoved.ts");
-exports.DeadCodeExpectItToBeRemoved = deadCodeExpectItToBeRemoved_1.DeadCodeExpectItToBeRemoved;
-var treeShakeThisAway_1 = __webpack_require__("./TreeShake/treeShakeThisAway.ts");
-exports.TreeShakeThisAway = treeShakeThisAway_1.TreeShakeThisAway;
-var add_two_numbers_1 = __webpack_require__("./Helpers/add-two-numbers.ts");
-exports.AddTwoNumbers = add_two_numbers_1.AddTwoNumbers;
-var treeShakeThisFunctionAway_1 = __webpack_require__("./TreeShake/treeShakeThisFunctionAway.ts");
-exports.TreeShakeThisFunctionAway = treeShakeThisFunctionAway_1.TreeShakeThisFunctionAway;
-
-
 /***/ })
 
 /******/ });
 });
-//# sourceMappingURL=example-node-package.js.map
+//# sourceMappingURL=string-extensions.js.map

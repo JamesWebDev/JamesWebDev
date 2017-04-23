@@ -1,4 +1,5 @@
-export * from './ExampleOfDeadCode/dc-example-one';
-export * from './ExampleOfDeadCode/dc-example-two';
-export * from './Misc/add-two-numbers';
-export * from './ExampleOfDeadCode/dc-example-func';
+import './Helpers/string-extensions';
+export { DeadCodeExpectItToBeRemoved } from './TreeShake/deadCodeExpectItToBeRemoved';
+export { TreeShakeThisAway } from './TreeShake/treeShakeThisAway';
+export { AddTwoNumbers } from './Helpers/add-two-numbers';
+export { TreeShakeThisFunctionAway } from './TreeShake/treeShakeThisFunctionAway';

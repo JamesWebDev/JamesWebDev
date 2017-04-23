@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@jameswebdev/example-node-package": "^1.0.0",
+    "@jameswebdev/example-ts-package": "^1.0.0",
     "angular": "latest",
     "jquery": "latest",
     "webpack-visualizer-plugin": "^0.1.11"

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [ "es5", "dom" ],
+    "outDir": "_testtsc",
+    //"rootDir":"src/",
+    //"baseUrl": "/",
+    "alwaysStrict": true,
+    "importHelpers":true,
+    "noEmitHelpers": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "_testtsc",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports":true,
+    //"traceResolution":true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": [
+      "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -6,11 +6,11 @@
     },
     "private": false,
     "access": "public",
-    "version": "1.0.001",
+    "version": "1.0.003",
     "description": "an example of how to create a node package with uncompiled ts files",
     "scripts": {
-        "publish": "npm publish --access public",
-        "update": "npm version patch",
+        "initial-publish": "npm publish --access public",
+        "publish-update": "node zPublishPackageToNPM.js&&npm publish",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "JamesWebDev",

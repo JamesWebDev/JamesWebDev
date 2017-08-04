@@ -1,10 +1,11 @@
 //const DtsBundlePlugin = require("./webpack.helpers").DtsBundlePlugin;
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
-const { CheckerPlugin } = require('awesome-typescript-loader');
+const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackVisualizer = require('webpack-visualizer-plugin');
 
 const env = process.env.NODE_ENV || 'development';
@@ -23,11 +24,15 @@ const SRCDIR = path.resolve( __dirname, './src' );
 const DIST = path.resolve( __dirname, './dist' );
 
 const globoptions = {
-    cwd:"./src"
+    cwd:"./src",
+    ignore:"./simple-node-demo.ts"
 }
+let buildFiles = glob.sync("./**/*.ts", globoptions);
 //let indexFile = glob.sync("./index.ts", globoptions);
-let styleFile = glob.sync("./core.module.scss", globoptions);
-let buildFiles = glob.sync("./**/*.ts", globoptions)
+//let styleFile = glob.sync("./core.module.scss", globoptions);
+let nodeDemoFile = glob.sync("./simple-node-demo.ts", {cwd:"./src"})
+
+
 
 console.log(buildFiles)
 
@@ -38,7 +43,8 @@ module.exports = {
     context: __dirname + "/src", //The base directory (absolute path!) for resolving the entry option. If output.pathinfo is set, the included pathinfo is shortened to this directory.
     entry:
     {
-        "client": buildFiles
+        "client": buildFiles,
+        "nodeDemo":nodeDemoFile
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files
@@ -50,10 +56,7 @@ module.exports = {
     resolve: { 
         extensions: ['.ts','.js','.css', '.scss'],
         alias: {        
-            //"ps-common-core":path.resolve(SRCDIR,'core.module'),
-            //"ps-common-core-oidc":path.resolve(SRCDIR,'oidc/oidc.module'),
-            //"ps-common-core-cacheBuster":path.resolve(SRCDIR,'cache-buster/cache-buster.module'),
-            "angular-pdfjs-viewer":path.resolve(NODEDIR,'angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js')
+            "exampleAppModule":path.resolve(SRCDIR,'./app/app.module.ts')
         },
         modules: [ 'node_modules' ]
     },
@@ -71,10 +74,10 @@ module.exports = {
             },
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript-loader',                
-                exclude:[
-                    path.resolve(__dirname, "node_modules")                    
-                ]
+                loader: 'awesome-typescript-loader',
+                options:{
+                    configFileName:"tsconfig.json"
+                }
             },               
             {
                 test: /\.json$/,
@@ -134,7 +137,20 @@ module.exports = {
             } 
         ]    
     },         
-    plugins: [               
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve( SRCDIR, 'index.html' ),
+            filename: 'index.html',
+            chunksSortMode: 'dependency',
+            inject: true
+        }), 
+        //https://github.com/s-panferov/awesome-typescript-loader
+        //If you want to use new paths and baseUrl feature of TS 2.0 please include TsConfigPathsPlugin
+        new TsConfigPathsPlugin({
+            context: __dirname,
+            configFileName:"./tsconfig.json",
+            compiler: "typescript",
+        }),               
         //angular wants window.jQuery to exist or it will use jquerylite, bundled jquery dne on the window, this exposes it to angular.
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -144,7 +160,7 @@ module.exports = {
         //This plugin should come before DtsBundlePlugin if you want to make a bundled d.ts file.
         //tsc dosen't emit d.ts files if they only contain interfaces, this copies them into dist
         new CopyWebpackPlugin([
-                { from: '../dist/**/*.d.ts', to: DIST },//Makes sure WebpackCleanupPlugin dosen't delete these
+                //{ from: '../dist/**/*.d.ts', to: DIST },//Makes sure WebpackCleanupPlugin dosen't delete these
                 { from: './**/*.d.ts', to: DIST },//Copies our d.ts files to dist since tsc dosen't emit them
                 { from: './assets/scss/**/*.scss', to: DIST }
             ], 
@@ -156,12 +172,7 @@ module.exports = {
         }),
         //this can be used to force bundle to be 1 file, not sure if this is important though...
         new webpack.optimize.LimitChunkCountPlugin({maxChunks:1}),
-        //https://github.com/s-panferov/awesome-typescript-loader
-        //If you want to use new paths and baseUrl feature of TS 2.0 please include TsConfigPathsPlugin
-        new TsConfigPathsPlugin({
-                configFileName: "./tsconfig.json",
-                compiler: "typescript",
-            }),
+        
         new NamedModulesPlugin({root:"./src"}),
         //is optional. Use it if you want async error reporting.
         // We need this plugin to detect a `--watch` mode. It may be removed later
@@ -170,7 +181,7 @@ module.exports = {
         //This webpack plugin cleans up the extraneous files from the webpack's output path.
         //Use the exclude option if you want to keep files that are not webpack assets.
         //Basically it compares folder contents to emitted files, and removes old assets.        
-        new WebpackCleanupPlugin(),
+        new WebpackCleanupPlugin({preview: false}),
         new WebpackVisualizer({filename: '../WebpackVisualizer.html'})
     ],
     //Include polyfills or mocks for various node stuff

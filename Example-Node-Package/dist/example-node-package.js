@@ -104,43 +104,6 @@ exports.AddTwoNumbers = AddTwoNumbers;
 
 /***/ }),
 
-/***/ "./Helpers/string-extensions.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var _this = this;
-__webpack_require__("./Helpers/strings.d.ts");
-String.prototype.right = function (numOfChars) {
-    if (numOfChars === undefined || numOfChars >= this.length) {
-        return this.toString();
-    }
-    return this.substring(this.length - numOfChars, this.length);
-};
-String.prototype.left = function (numOfChars) {
-    if (numOfChars === undefined || numOfChars >= this.length) {
-        return this.toString();
-    }
-    return this.substring(0, numOfChars);
-};
-String.prototype.orEmpty = function () { return _this || ""; };
-function escapeRegExp(string) {
-    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-}
-String.prototype.replaceAll = function (find, replace) {
-    return this.replace(new RegExp(escapeRegExp(find), 'g'), replace);
-};
-
-
-/***/ }),
-
-/***/ "./Helpers/strings.d.ts":
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ "./TreeShake/deadCodeExpectItToBeRemoved.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -218,7 +181,6 @@ exports.TreeShakeThisFunctionAway = function (one, two) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__("./Helpers/string-extensions.ts");
 var deadCodeExpectItToBeRemoved_1 = __webpack_require__("./TreeShake/deadCodeExpectItToBeRemoved.ts");
 exports.DeadCodeExpectItToBeRemoved = deadCodeExpectItToBeRemoved_1.DeadCodeExpectItToBeRemoved;
 var treeShakeThisAway_1 = __webpack_require__("./TreeShake/treeShakeThisAway.ts");

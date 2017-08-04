@@ -35,8 +35,7 @@ module.exports = {
     context: __dirname + "/src", //The base directory (absolute path!) for resolving the entry option. If output.pathinfo is set, the included pathinfo is shortened to this directory.
     entry:
     {
-        "example-node-package": "./index.ts",
-        "string-extensions":"./Helpers/string-extensions.ts"
+        "example-node-package": "./index.ts"
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files
@@ -48,10 +47,7 @@ module.exports = {
     externals: [NodeExternals()], 
     resolve: { 
         extensions: ['.ts','.js','.css', '.scss'],
-        alias: {        
-            //"ps-common-core":path.resolve(SRCDIR,'core.module'),
-            //"ps-common-core-oidc":path.resolve(SRCDIR,'oidc/oidc.module'),
-            //"ps-common-core-cacheBuster":path.resolve(SRCDIR,'cache-buster/cache-buster.module'),
+        alias: {                    
             "angular-pdfjs-viewer":path.resolve(NODEDIR,'angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js')
         },
         modules: [ 'node_modules' ]

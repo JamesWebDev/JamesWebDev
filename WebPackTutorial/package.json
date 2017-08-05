@@ -1,0 +1,25 @@
+{
+  "name": "@jameswebdev/webpacktutorial",
+  "version": "1.0.0",
+  "description": "Multiple examples of webpack2 from bare bones to production ready",
+  "main": "index.js",
+  "scripts": {
+    "example1": "webpack --config=webpack.example1.js & webpack-dev-server --config=webpack.example1.js --open --progress --colors",
+    "example2": "webpack --config=webpack.example2.js & webpack-dev-server --config=webpack.example2.js --open --progress --colors",
+    "example3": "webpack --config=webpack.example3.js & webpack-dev-server --config=webpack.example3.js --open --progress --colors"
+  },
+  "keywords": [
+    "Webpack2",
+    "Examples",
+    "Tutorial"
+  ],
+  "author": "James Freeman",
+  "license": "ISC",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.2.2",
+    "html-webpack-plugin": "^2.30.1",
+    "typescript": "^2.4.2",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  }
+}

@@ -15,7 +15,6 @@
 
 ## Topics still to be written
 
-* Using file glob for entry point
 * Style Sheets
   * plane css
   * Transpile scss
@@ -282,7 +281,7 @@ module.exports = {
 
 * If you look at the source code in example5 you can see that this isn't a SPA application, but rather it is a classic website in that each page is a separate html file running separate js. As a result these 3 files are fully isolated other than that they all use the files in the shared directory.
 * The app.ts file dosen't import page1.ts, or page2.ts, and vice versa.
-* When webpack builds the [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/) it looks for anything that is a url be it an import/require statment, or image/file path and uses all of them to then generate a bundle. Because app.ts/page1.ts/page2.ts arn't in eachothers dependency tree using any one of them as a single entry point would fail to build/bundle all of your source code. Their are 2.5 ways to solve this.
+* When webpack builds the [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/) it looks for anything that is a url, be it an import/require statment, or image/file path and uses all of them to then generate a bundle. Because app.ts/page1.ts/page2.ts arn't in eachothers dependency tree using any one of them as a single entry point would fail to build/bundle all of your source code. Their are 2.5 ways to solve this.
   1. As in example5 you can have multiple entry points, webpack will walk each file tree separately, and you can then use CommonsChunkPlugin to pull shared resources into a common/sharable bundle. Without CommonsChunkPlugin the shared code would be duplicated in each each bundle file.
   1. You can use an array of files as your entry point. This would be the normal choice in a SPA
   1. For more complex websites do both. Have multiple entry points some or all of which are arrays of files.
@@ -337,7 +336,5 @@ new webpack.ProvidePlugin({
     'window.jQuery':"jquery"
 }),
 ```
-
-string routing to html, string injection, supply globals like jquery
 
 ------------------------

@@ -39,7 +39,14 @@
     
     "example9": "npm run example9:build & npm run example9:run",
     "example9:build": "webpack --config=webpack-config/webpack.example9.js",
-    "example9:run": "webpack-dev-server --config=webpack-config/webpack.example9.js --open --progress --colors"
+    "example9:run": "webpack-dev-server --config=webpack-config/webpack.example9.js --open --progress --colors",
+
+    "example10": "npm run example10:build & npm run example10:run",
+    "example10:build": "webpack --config=webpack-config/webpack.example10.js",
+    "example10:run": "webpack-dev-server --config=webpack-config/webpack.example10.js --open --progress --colors",
+    "example10a":"webpack  --config=webpack-config/webpack.example10a.js",
+    "example10b":"webpack  --config=webpack-config/webpack.example10b.js",
+    "example10c":"webpack  --config=webpack-config/webpack.example10c.js"
   },
   "keywords": [
     "Webpack2",

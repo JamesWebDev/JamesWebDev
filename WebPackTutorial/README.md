@@ -17,6 +17,7 @@
 * [Scss common misunderstanding](#scss-common-misunderstanding)
 * [How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundle-output)
 * [Why everyone needs file hashing](#why-everyone-needs-file-hashing)
+* [Understanding how webpack hashing works](#understanding-how-webpack-hashing-works)
 
 ## Topics still to be written
 
@@ -35,6 +36,8 @@
 * Copying files without modifying/bundling/transpiling them
 * ~~Cleanup/removal of old build files~~
 * Uglify prod build
+* A fully functional angularjs, typescript, scss, webpack2 production ready example with images, fonts, using new and old sytle js libraries.
+* Cover differences in webpack when writing a js library vs a website.
 
 ## System Setup
 
@@ -495,3 +498,20 @@ Their is **one** sure fire browser agnostic way to guarentee that the browser im
 
 This is a completely unreasonable thing to do by hand, but simple to do with webpack. It can use a hash of the file content when outputting your build files, and rewrite all your url's to point at the new dynamically generated file name.
 If you have ever been involved in the second deployment of a site written by new web developers you will probabally understand why this excites me.
+
+[back to beginning](#webpack-tutorial)
+
+## Understanding how webpack hashing works
+
+Example10a
+
+run this command 3 times `webpack --output-filename=[name]-[id]-[hash].js --config=webpack-config/webpack.example10.js` notice the hash is flipping back and forth between 2 hashes
+
+Example10b
+
+run this command 2 times `npm run example10b` notice the hash isn't changing.
+
+now go and modify MiscSecondEntryPoint.ts, change the `console.log(y);` statment on line 6 to `console.log(x);` and then run `npm run example10b` again.
+
+* Notice, all of the file hashes have changed. If this was behaving the way we want, then only the [id]-misc-[chunkhash].js file in the dist folder that would have changed.
+

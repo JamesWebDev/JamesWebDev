@@ -15,7 +15,7 @@
 * [Make css output smaller via the ExtractTextPlugin](#example7b-using-extracttextplugin-to-ouput-a-css-file)
 * [Adding scss transpiling to the build](#example8-adding-scss-transpiling-to-the-build)
 * [Scss common misunderstanding](#scss-common-misunderstanding)
-* [How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundles-output)
+* [How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundle-output)
 
 ## Topics still to be written
 

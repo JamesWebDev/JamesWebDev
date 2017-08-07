@@ -16,11 +16,12 @@
 * [Adding scss transpiling to the build](#example8-adding-scss-transpiling-to-the-build)
 * [Scss common misunderstanding](#scss-common-misunderstanding)
 * [How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundle-output)
+* [Why everyone needs file hashing](#why-everyone-needs-file-hashing)
 
 ## Topics still to be written
 
 * Hashing file names
-  * Pulling Vendor files into separate bundle
+  * ~~Pulling Vendor files into separate bundle~~
   * Preserving Vendor hash when local source files change (manifest)
 * Source Maps
 * Module Loaders
@@ -481,3 +482,16 @@ h2 {
   background-color: black;
   color: red; }
 ```
+
+[back to beginning](#webpack-tutorial)
+
+## Why everyone needs file hashing
+
+Browsers cache site content aka your Html, Images, Css, and Javascript. For every production deployment of your site you are going to want the end user to be downloading running and viewing the new/changed content, and not displaying/executing their cached old copy of your site. Getting browsers to recognize that a file has changed can be very complex. Their are lots of partial solutions, and its easy to get it only partially right. Accidentally solving the problem for Chrome, but finding the solution is slightly different in IE etc. etc.
+
+Their is **one** sure fire browser agnostic way to guarentee that the browser imediately downloads new content while preserving unchanged content for as long as possible...
+
+**Change the file name when the content of the file changes!**
+
+This is a completely unreasonable thing to do by hand, but simple to do with webpack. It can use a hash of the file content when outputting your build files, and rewrite all your url's to point at the new dynamically generated file name.
+If you have ever been involved in the second deployment of a site written by new web developers you will probabally understand why this excites me.

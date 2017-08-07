@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
-    entry: './example3/app.ts',    
+    entry: './src/example3/app.ts',    
     output: {
-        path: path.resolve(__dirname, 'example3/dist'),
+        path: path.resolve(process.cwd(), 'src/example3/dist'),
         filename: 'bundle.js'
     },
     resolve: {
@@ -18,7 +18,7 @@ module.exports = {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader',//faster than ts-loader, type checks on seporate thread
                 exclude:[
-                    path.resolve(__dirname, "node_modules")
+                    path.resolve(process.cwd(), "node_modules")
                 ]
             }
         ]
@@ -26,15 +26,15 @@ module.exports = {
     plugins:[
         new TsConfigPathsPlugin({configFileName: "./tsconfig.example3.json",compiler: "typescript"}),
         new HtmlWebpackPlugin({
-            template: path.resolve( __dirname, 'example3/index.html' ),
+            template: path.resolve( process.cwd(), 'src/example3/index.html' ),
             filename: 'index.html',
             chunksSortMode: 'dependency',
             inject: true
         }),
     ],
     devServer: {
-        contentBase: path.join(__dirname, "example3"),
-        openPage: './example3/index.html',
+        contentBase: path.join(process.cwd(), "src/example3"),
+        openPage: './src/example3/index.html',
         port: 3003
     }
 }

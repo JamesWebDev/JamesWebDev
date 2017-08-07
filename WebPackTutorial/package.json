@@ -4,22 +4,42 @@
   "description": "Multiple examples of webpack2 all the way from bare bones to production ready",
   "main": "index.js",
   "scripts": {
-    "example1": "webpack --config=webpack.example1.js & webpack-dev-server --config=webpack.example1.js --open --progress --colors",
-    "example2": "webpack --config=webpack.example2.js & webpack-dev-server --config=webpack.example2.js --open --progress --colors",
-    "example3": "webpack --config=webpack.example3.js & webpack-dev-server --config=webpack.example3.js --open --progress --colors",
-    "example4": "webpack --config=webpack.example4.js & webpack-dev-server --config=webpack.example4.js --open --progress --colors",
-    "example5": "webpack --config=webpack.example5.js & webpack-dev-server --config=webpack.example5.js --open --progress --colors",
-    "example6": "webpack --config=webpack.example6.js & webpack-dev-server --config=webpack.example6.js --open --progress --colors",
+    "example1": "npm run example1:build & npm run example1:run",
+    "example1:build": "webpack --config=webpack-config/webpack.example1.js",
+    "example1:run": "webpack-dev-server --config=webpack-config/webpack.example1.js --open --progress --colors",
+    
+    "example2": "npm run example2:build & npm run example2:run",
+    "example2:build": "webpack --config=webpack-config/webpack.example2.js",
+    "example2:run": "webpack-dev-server --config=webpack-config/webpack.example2.js --open --progress --colors",
+    
+    "example3": "npm run example3:build & npm run example3:run",
+    "example3:build": "webpack --config=webpack-config/webpack.example3.js",
+    "example3:run": "webpack-dev-server --config=webpack-config/webpack.example3.js --open --progress --colors",
+    
+    "example4": "npm run example4:build & npm run example4:run",
+    "example4:build": "webpack --config=webpack-config/webpack.example4.js",
+    "example4:run": "webpack-dev-server --config=webpack-config/webpack.example4.js --open --progress --colors",
+    
+    "example5": "npm run example5:build & npm run example5:run",
+    "example5:build": "webpack --config=webpack-config/webpack.example5.js",
+    "example5:run": "webpack-dev-server --config=webpack-config/webpack.example5.js --open --progress --colors",
+    
+    "example6": "npm run example6:build & npm run example6:run",
+    "example6:build": "webpack --config=webpack-config/webpack.example6.js",
+    "example6:run": "webpack-dev-server --config=webpack-config/webpack.example6.js --open --progress --colors",
+    
     "example7": "npm run example7:build & npm run example7:run",
-    "example7:build": "webpack --config=webpack.example7.js",
-    "example7:run": "webpack-dev-server --config=webpack.example7.js --open --progress --colors",
-    "example7b": "webpack --config=webpack.example7b.js",
+    "example7:build": "webpack --config=webpack-config/webpack.example7.js",
+    "example7:run": "webpack-dev-server --config=webpack-config/webpack.example7.js --open --progress --colors",
+    "example7b": "webpack --config=webpack-config/webpack.example7b.js",
+    
     "example8": "npm run example8:build & npm run example8:run",
-    "example8:build": "webpack --config=webpack.example8.js",
-    "example8:run": "webpack-dev-server --config=webpack.example8.js --open --progress --colors",
+    "example8:build": "webpack --config=webpack-config/webpack.example8.js",
+    "example8:run": "webpack-dev-server --config=webpack-config/webpack.example8.js --open --progress --colors",
+    
     "example9": "npm run example9:build & npm run example9:run",
-    "example9:build": "webpack --config=webpack.example9.js",
-    "example9:run": "webpack-dev-server --config=webpack.example9.js --open --progress --colors"
+    "example9:build": "webpack --config=webpack-config/webpack.example9.js",
+    "example9:run": "webpack-dev-server --config=webpack-config/webpack.example9.js --open --progress --colors"
   },
   "keywords": [
     "Webpack2",

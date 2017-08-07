@@ -8,16 +8,15 @@ const webpack = require( 'webpack' );
 const glob = require("glob");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const typescriptFiles = glob.sync("./example7/**/*.ts")
-//const cssFiles = glob.sync("./example7/**/*.css")
+const projectFiles = glob.sync("./src/example9/**/*.ts");
+projectFiles.push('./src/example9/app.scss');
 
 module.exports = {
     entry: {
-        app: typescriptFiles
-        //style: cssFiles
+        app: projectFiles
     },    
     output: {
-        path: path.resolve(__dirname, 'example7/dist'),
+        path: path.resolve(process.cwd(), 'src/example9/dist'),
         filename: '[name].js'
     },
     resolve: {
@@ -30,7 +29,7 @@ module.exports = {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader',//faster than ts-loader, type checks on seporate thread
                 exclude:[
-                    path.resolve(__dirname, "node_modules")
+                    path.resolve(process.cwd(), "node_modules")
                 ]
             },
             {
@@ -44,10 +43,19 @@ module.exports = {
                 }
             },
             {
-                test: /\.(css)$/,
+                test: /\.(css|scss)$/,                
                 use: ExtractTextPlugin.extract({
                     use: [
-                        {loader: 'css-loader'}
+                        {loader: 'css-loader'},
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                includePaths: [
+                                    path.resolve(process.cwd(), './node_modules'), 
+                                    path.resolve(process.cwd(), './src/example9')
+                                ]
+                            }
+                        }
                     ]
                 })
             },            
@@ -61,26 +69,26 @@ module.exports = {
         }),
         //https://github.com/s-panferov/awesome-typescript-loader
         //If you want to use new paths and baseUrl feature of TS 2.0 please include TsConfigPathsPlugin
-        new TsConfigPathsPlugin({configFileName: "./tsconfig.example7.json",compiler: "typescript"}),
+        new TsConfigPathsPlugin({configFileName: "./tsconfig.example9.json",compiler: "typescript"}),
         //This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
         //this is especially useful for webpack bundles that include a file hash in the filename 
         //which changes every compilation. You can either let the plugin generate an HTML file 
         //for you, supply your own template using lodash templates or use your own loader.
         //https://github.com/jantimon/html-webpack-plugin
         new HtmlWebpackPlugin({
-            template: path.resolve( __dirname, 'example7/index.html' ),
+            template: path.resolve( process.cwd(), 'src/example9/index.html' ),
             filename: 'index.html',            
             chunksSortMode: 'dependency',
             inject: true
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve( __dirname, 'example7/page1/page1.html' ),
+            template: path.resolve( process.cwd(), 'src/example9/page1/page1.html' ),
             filename: 'page1.html',
             chunksSortMode: 'dependency',
             inject: true
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve( __dirname, 'example7/page2/page2.html' ),
+            template: path.resolve( process.cwd(), 'src/example9/page2/page2.html' ),
             filename: 'page2.html',
             chunksSortMode: 'dependency',
             inject: true
@@ -107,8 +115,8 @@ module.exports = {
         new WebpackCleanupPlugin()
     ],
     devServer: {
-        contentBase: path.join(__dirname, "example7"),
-        openPage: './example7/index.html',
-        port: 3007
+        contentBase: path.join(process.cwd(), "src/example9"),
+        openPage: './src/example9/index.html',
+        port: 3009
     }
 }

@@ -8,13 +8,12 @@ const webpack = require( 'webpack' );
 const glob = require("glob");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const typescriptFiles = glob.sync("./example9/**/*.ts")
-//const cssFiles = glob.sync("./example9/**/*.css")
+const projectFiles = glob.sync("./example9/**/*.ts");
+projectFiles.push('./example9/app.scss');
 
 module.exports = {
     entry: {
-        app: typescriptFiles,
-        style: './example9/app.scss'
+        app: projectFiles
     },    
     output: {
         path: path.resolve(__dirname, 'example9/dist'),

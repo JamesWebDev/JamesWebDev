@@ -14,14 +14,11 @@
 * [Add css to your build process](#example7-add-css-to-your-build-process)
 * [Make css output smaller via the ExtractTextPlugin](#example7b-using-extracttextplugin-to-ouput-a-css-file)
 * [Adding scss transpiling to the build](#example8-adding-scss-transpiling-to-the-build)
-* [scss common misunderstanding](#scss-common-misunderstanding)
+* [Scss common misunderstanding](#scss-common-misunderstanding)
+* [How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundles-output)
 
 ## Topics still to be written
 
-* ~~Style Sheets~~
-  * ~~plane css~~
-  * Transpile scss
-    * ~~converting output back to css instead of js~~
 * Source Maps
 * Module Loaders
   * babel
@@ -425,12 +422,60 @@ For example 8 I've added `npm i -D sass-loader` and also `npm i -D node-sass` th
 }
 ```
 
-If run `npm run example8` you will see that like before we get a single style.css file output, but you may notice that the h2 rule is duplicated. For details read [scss common misunderstanding](#scss-common-misunderstanding).
+If run `npm run example8` you will see that like before we get a single style.css file output, but you may notice that the h2 rule is duplicated.
+
+```css
+h2 {
+  background-color: black;
+  color: red; }
+
+#IndexHeader {
+  background-color: #1E90FF; }
+h2 {
+  background-color: black;
+  color: red; }
+
+#PageOneHeader {
+  background-color: #8FBC8F; }
+h2 {
+  background-color: black;
+  color: red; }
+
+#PageTwoHeader {
+  background-color: #00FFFF; }
+```
+
+For details on why this happened read [scss common misunderstanding](#scss-common-misunderstanding), and how to solve for this in [Example9](#example9-how-to-prevent-duplicate-code-in-your-scss-bundles-output)
+
+[back to beginning](#webpack-tutorial)
 
 ### scss common misunderstanding
 
 Where typescript, and webpack webpack imports behave in one manner, scss imports have some subtle differences that often lead to duplication in the bundle. If I were to compare them to telephones, a javascript import/require would be like asking for my phone number, and an scss @import is like asking for my actual phone. @import does a literal copy past. If your goal is to have the smallest bundle possible and to avoid transmitting the same code twice, we are going to need to use scss [Partials](http://sass-lang.com/guide#topic-4), and an single app/main.scss file which imports all the partials.
 
-## Example9 How to prevent duplicate code in scss bundles
+[back to beginning](#webpack-tutorial)
 
-Instead of importing app.scss into each pages scss file like in example8, in this example I have inverted the imports. By removing the css import in each pages ts file e.g. `import './page1.scss'`, and removing the `@import '../app'` from each page's scss file
+## Example9 How to prevent duplicate code in your Scss bundle output
+
+```bash
+npm run example9
+```
+
+Instead of importing app.scss into each pages scss file like in example8, in this example I have inverted the imports. By removing the css import of each pages ts file e.g. `import './page1.scss'`, and removing the `@import '../app'` from each page's individual scss file, and moving all the `@import` statments into the app.scss file, I have given node-sass one central location in which it can copy and paste all the css together. The last step was to prefix each pages scss file name with an `_` this tells sass that the file is a [Partial](http://sass-lang.com/guide#topic-4). Technically because we are using webpack the `_` may not be required, but if you were to use Sass compiler by itself it would generate one css file per scss file not prefixed with an `_` and it feels safer to me to follow their compiler conventions.
+
+Taking a look at the output you can see we now have no more duplication
+
+```css
+#IndexHeader {
+  background-color: #1E90FF; }
+
+#PageOneHeader {
+  background-color: #8FBC8F; }
+
+#PageTwoHeader {
+  background-color: #00FFFF; }
+
+h2 {
+  background-color: black;
+  color: red; }
+```

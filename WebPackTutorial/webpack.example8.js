@@ -9,12 +9,10 @@ const glob = require("glob");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const typescriptFiles = glob.sync("./example8/**/*.ts")
-//const cssFiles = glob.sync("./example8/**/*.css")
 
 module.exports = {
     entry: {
         app: typescriptFiles
-        //style: cssFiles
     },    
     output: {
         path: path.resolve(__dirname, 'example8/dist'),

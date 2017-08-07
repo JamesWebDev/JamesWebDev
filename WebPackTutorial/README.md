@@ -6,19 +6,22 @@
 * [Bundle Javascript](#example1-bundle-javascript)
 * [Add index.html to bundle](#example2-bundle-javascript-and-html)
 * [Add typescript transpile to build](#example3-transpile-typescript)
-* [Example of code reuse](#example4-example-of-code-reuse)
 * [Example of code reusability](#example4-example-of-code-reuse)
 * [Example of multiple entry points](#example5-multiple-entry-points)
 * [What are entry points](#entry-points)
 * [Using a file array as an entry point](#example6-using-a-file-array-as-an-entry-point)
 * [File loading issues not solved by using a globbed file array](#file-loading-issues-not-solved-by-using-a-globbed-file-array)
+* [Add css to your build process](#example7-add-css-to-your-build-process)
+* [Make css output smaller via the ExtractTextPlugin](#example7b-using-extracttextplugin-to-ouput-a-css-file)
+* [Adding scss transpiling to the build](#example8-adding-scss-transpiling-to-the-build)
+* [scss common misunderstanding](#scss-common-misunderstanding)
 
 ## Topics still to be written
 
-* Style Sheets
-  * plane css
+* ~~Style Sheets~~
+  * ~~plane css~~
   * Transpile scss
-    * converting output back to css instead of js
+    * ~~converting output back to css instead of js~~
 * Source Maps
 * Module Loaders
   * babel
@@ -158,8 +161,6 @@ run this command to see what yours are > npm ls -g --json --depth=0
 [back to beginning](#webpack-tutorial)
 
 ## Example1 Bundle Javascript
-
-
 
 ```bash
 npm run example1
@@ -319,7 +320,7 @@ Their are still two scenarios where you can get script loading and load order is
 
 * If you are accessing a global/ambient variable and you expect it to be in a certain state, but you haven't included the import of the file that would have put it in the desired state.
   * Example1: In angularjs if you try to add a service to a module by calling something like this.  
-  angular.module('app').service('MyApiCaller',MyApiCaller)  
+  `angular.module('app').service('MyApiCaller',MyApiCaller)`
   It expects the module to have been initialized, but it references it via a string and not an object reference; as a result typescript dosen't realize the object is undefined. You can fix this one of 2 ways.
     * (best option) You can import your app.module in your service. Every file should be importing all of it's dependencies so this would be the modern approach.
     * You can have one master index.ts file that imports all of your files in the correct order like we use to have to do with script tags in html files.
@@ -338,3 +339,98 @@ new webpack.ProvidePlugin({
 ```
 
 ------------------------
+[back to beginning](#webpack-tutorial)
+
+## Example7 Add css to your build process
+
+First thing, we are going to add two new packages css-loader, and sytle-loader  
+`npm i -D css-loader`  
+`npm i -D style-loader`
+
+next we would add this to the webpack module rules
+
+```js
+{
+    test: /\.(css)$/,
+    use: [
+        { loader: "style-loader" },
+        { loader: "css-loader" }
+    ]
+},
+```
+
+We will also need to do something so that the css files showup in the entry point [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/). You have at least 3 options at this point.
+
+1. (my choice) In each pages ts file import the required css. `import './page1.css'`
+
+Webpack passes the output up the array of loaders. So when webpack is processing a css file, given our config, [css-loader](https://github.com/webpack-contrib/css-loader) will process the css file first, and then [style-loader](https://github.com/webpack-contrib/style-loader) processes the output of css-loader. css-loader handles the webpack [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/) of your css files, and style-loader adds CSS to the DOM by injecting a style tag
+
+```bash
+npm run example7
+```
+
+You may notice that in your dist file you don't see any css files.
+style-loader uses javascript to add your styles to the DOM. With sytle-loader our app.js file is **20.8KB** without it, app.js is **6KB**. With more complex sites I have seen the overhead of using sytle-loader as large as 80KB.
+
+To avoid this lets try solving it another way. Lets use the [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)
+
+[back to beginning](#webpack-tutorial)
+
+## Example7b using ExtractTextPlugin to ouput a css file
+
+npm i -D extract-text-webpack-plugin
+
+```js
+{
+    test: /\.(css)$/,
+    use: ExtractTextPlugin.extract({
+        use: [
+            {loader: 'css-loader'}
+        ]
+    })
+},
+```
+
+and then run
+
+```bash
+npm run example7b
+```
+
+As you can see this file size is much better. Our app.js file is **2.8KB**, and style.css is **148bytes**, and extract-text-webpack-plugin has added a link tag for style.css to our html. Run `npm run example7:build` to compare file sizes.
+
+[back to beginning](#webpack-tutorial)
+
+## Example8 adding scss transpiling to the build
+
+For example 8 I've added `npm i -D sass-loader` and also `npm i -D node-sass` then I changed all the css files to scss files. I have also added an h2 tag to all 3 pages, and I put the style for h2's in the app.scss file.
+
+```js
+{
+    test: /\.(css|scss)$/,
+    use: ExtractTextPlugin.extract({
+        use: [
+            {loader: 'css-loader'},
+            {
+                loader: "sass-loader",
+                options: {
+                    includePaths: [
+                        path.resolve(__dirname, './node_modules'),
+                        path.resolve(__dirname, './example8')
+                    ]
+                }
+            }
+        ]
+    })
+}
+```
+
+If run `npm run example8` you will see that like before we get a single style.css file output, but you may notice that the h2 rule is duplicated. For details read [scss common misunderstanding](#scss-common-misunderstanding).
+
+### scss common misunderstanding
+
+Where typescript, and webpack webpack imports behave in one manner, scss imports have some subtle differences that often lead to duplication in the bundle. If I were to compare them to telephones, a javascript import/require would be like asking for my phone number, and an scss @import is like asking for my actual phone. @import does a literal copy past. If your goal is to have the smallest bundle possible and to avoid transmitting the same code twice, we are going to need to use scss [Partials](http://sass-lang.com/guide#topic-4), and an single app/main.scss file which imports all the partials.
+
+## Example9 How to prevent duplicate code in scss bundles
+
+Instead of importing app.scss into each pages scss file like in example8, in this example I have inverted the imports. By removing the css import in each pages ts file e.g. `import './page1.scss'`, and removing the `@import '../app'` from each page's scss file

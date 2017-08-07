@@ -9,7 +9,17 @@
     "example3": "webpack --config=webpack.example3.js & webpack-dev-server --config=webpack.example3.js --open --progress --colors",
     "example4": "webpack --config=webpack.example4.js & webpack-dev-server --config=webpack.example4.js --open --progress --colors",
     "example5": "webpack --config=webpack.example5.js & webpack-dev-server --config=webpack.example5.js --open --progress --colors",
-    "example6": "webpack --config=webpack.example6.js & webpack-dev-server --config=webpack.example6.js --open --progress --colors"
+    "example6": "webpack --config=webpack.example6.js & webpack-dev-server --config=webpack.example6.js --open --progress --colors",
+    "example7": "npm run example7:build & npm run example7:run",
+    "example7:build": "webpack --config=webpack.example7.js",
+    "example7:run": "webpack-dev-server --config=webpack.example7.js --open --progress --colors",
+    "example7b": "webpack --config=webpack.example7b.js",
+    "example8": "npm run example8:build & npm run example8:run",
+    "example8:build": "webpack --config=webpack.example8.js",
+    "example8:run": "webpack-dev-server --config=webpack.example8.js --open --progress --colors",
+    "example9": "npm run example9:build & npm run example9:run",
+    "example9:build": "webpack --config=webpack.example9.js",
+    "example9:run": "webpack-dev-server --config=webpack.example9.js --open --progress --colors"
   },
   "keywords": [
     "Webpack2",
@@ -21,8 +31,13 @@
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.2",
     "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
     "html-loader": "^0.5.0",
     "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
     "typescript": "^2.4.2",
     "webpack": "^3.4.1",
     "webpack-cleanup-plugin": "^0.5.1",

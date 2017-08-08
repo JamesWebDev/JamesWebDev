@@ -8,14 +8,18 @@ const webpack = require( `webpack` );
 const glob = require(`glob`);
 const ExtractTextPlugin = require(`extract-text-webpack-plugin`);
 const exampleX = 'example10';
-const projectFiles = glob.sync(`./src/${exampleX}/**/*.ts`);
-projectFiles.push(`./src/${exampleX}/app.scss`);
+const globOptions = {
+    ignore:`./src/${exampleX}/MiscSecondEntryPoint.ts`
+};
+const projectFiles = glob.sync(`./src/${exampleX}/**/*.ts`,globOptions);
+//projectFiles.push(`./src/${exampleX}/app.scss`);
 
 
 
 module.exports = {
     entry: {
         app: projectFiles,
+        style: `./src/${exampleX}/app.scss`,
         misc: `./src/${exampleX}/MiscSecondEntryPoint.ts`
     },    
     output: {

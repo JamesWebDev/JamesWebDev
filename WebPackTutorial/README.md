@@ -1,5 +1,32 @@
 # Webpack Tutorial
 
+<!-- TOC -->
+
+- [Webpack Tutorial](#webpack-tutorial)
+    - [Topics](#topics)
+    - [Topics still to be written](#topics-still-to-be-written)
+    - [System Setup](#system-setup)
+    - [Example1 Bundle Javascript](#example1-bundle-javascript)
+    - [Example2 bundle Javascript and Html](#example2-bundle-javascript-and-html)
+    - [Example3 transpile typescript](#example3-transpile-typescript)
+    - [Example4 Example of code reuse](#example4-example-of-code-reuse)
+    - [Example5 multiple entry points](#example5-multiple-entry-points)
+        - [Entry Points](#entry-points)
+    - [Example6 Using a file array as an entry point](#example6-using-a-file-array-as-an-entry-point)
+        - [File loading issues not solved by using a globbed file array](#file-loading-issues-not-solved-by-using-a-globbed-file-array)
+    - [Example7 Add css to your build process](#example7-add-css-to-your-build-process)
+    - [Example7b using ExtractTextPlugin to ouput a css file](#example7b-using-extracttextplugin-to-ouput-a-css-file)
+    - [Example8 adding scss transpiling to the build](#example8-adding-scss-transpiling-to-the-build)
+        - [scss common misunderstanding](#scss-common-misunderstanding)
+    - [Example9 How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundle-output)
+    - [Why everyone needs file hashing](#why-everyone-needs-file-hashing)
+    - [Understanding how webpack hashing works](#understanding-how-webpack-hashing-works)
+        - [Example10a](#example10a)
+        - [Example10b](#example10b)
+        - [Example10c](#example10c)
+
+<!-- /TOC -->
+<!--
 ## Topics
 
 * [System Setup](#system-setup)
@@ -18,7 +45,7 @@
 * [How to prevent duplicate code in your Scss bundle output](#example9-how-to-prevent-duplicate-code-in-your-scss-bundle-output)
 * [Why everyone needs file hashing](#why-everyone-needs-file-hashing)
 * [Understanding how webpack hashing works](#understanding-how-webpack-hashing-works)
-
+-->
 ## Topics still to be written
 
 * Hashing file names
@@ -503,15 +530,36 @@ If you have ever been involved in the second deployment of a site written by new
 
 ## Understanding how webpack hashing works
 
-Example10a
+### Example10a
 
-run this command 3 times `webpack --output-filename=[name]-[id]-[hash].js --config=webpack-config/webpack.example10.js` notice the hash is flipping back and forth between 2 hashes
+run this command `npm run example10a` 
 
-Example10b
+### Example10b
 
 run this command 2 times `npm run example10b` notice the hash isn't changing.
 
 now go and modify MiscSecondEntryPoint.ts, change the `console.log(y);` statment on line 6 to `console.log(x);` and then run `npm run example10b` again.
 
-* Notice, all of the file hashes have changed. If this was behaving the way we want, then only the [id]-misc-[chunkhash].js file in the dist folder that would have changed.
+* Notice, all of the file hashes have changed. If this was behaving the way we want, then only the [id]-misc-[chunkhash].js file in the dist folder that would have changed. This is a side effect of the webpack manifest.
+
+### Example10c
+
+Run the command `npm run example10c` and take a look at the dist folder. It's not perfect but this is the first configuration that I would consider a reasonable solution for production hashing. 
+
+I've added another instance of the CommonsChunkPlugin.
+The first instance processes the app entry point and creates a shared chunk, and the second instance processes the shared chunk. The result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

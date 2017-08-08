@@ -3,7 +3,6 @@
 <!-- TOC -->
 
 - [Webpack Tutorial](#webpack-tutorial)
-    - [Topics](#topics)
     - [Topics still to be written](#topics-still-to-be-written)
     - [System Setup](#system-setup)
     - [Example1 Bundle Javascript](#example1-bundle-javascript)
@@ -24,10 +23,12 @@
         - [Example10a](#example10a)
         - [Example10b](#example10b)
         - [Example10c](#example10c)
+        - [Example10d](#example10d)
 
 <!-- /TOC -->
+
 <!--
-## Topics
+//## Topics
 
 * [System Setup](#system-setup)
 * [Bundle Javascript](#example1-bundle-javascript)
@@ -48,9 +49,9 @@
 -->
 ## Topics still to be written
 
-* Hashing file names
+* ~~Hashing file names~~
   * ~~Pulling Vendor files into separate bundle~~
-  * Preserving Vendor hash when local source files change (manifest)
+  * ~~Preserving Vendor hash when local source files change (manifest)~~
 * Source Maps
 * Module Loaders
   * babel
@@ -564,3 +565,8 @@ Now go to line 4 in page1.ts, and change one character and run `npm run example1
 
 ### Example10d
 
+**The Ideal Hashing Solution** Run the command `npm run example10d` and take a look at the dist folder. Modify any one file, and only the bundle file containing the modified code will get a new hash value also; no functionless js files just to hold the webpack manifest, and no empty js files left behind by the extract text plugin. The client can cache the content files forever and we arn't going to run into any cacheing problems.
+
+The ExtractTextPlugin uses contenthash so that the **css** files hash is uneffected by changes in js.  
+The **app.js** code is hashed after the css is extracted so that css changes don't change your app.js hash.  
+The WebpackMd5Hash plugin together with the InlineChunkManifestHtmlWebpackPlugin protect the **shared.js** from changes in app.js code.

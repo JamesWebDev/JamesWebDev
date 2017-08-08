@@ -24,12 +24,11 @@ projectFiles.push(`./src/${exampleX}/app.scss`);
 module.exports = {
     entry: {
         app: projectFiles,
-        //style: `./src/${exampleX}/app.scss`,
         misc: `./src/${exampleX}/MiscSecondEntryPoint.ts`
     },    
     output: {
         path: path.resolve(process.cwd(), `src/${exampleX}/dist`),
-        filename: `[id]-[name]-[chunkhash].js`
+        filename: `[id]-[name]-[chunkhash:7].js`
     },
     resolve: {
         extensions: [`.ts`,`.js`],  
@@ -83,7 +82,7 @@ module.exports = {
         //This extracts the css into it`s own css file rather than bundling it in the app.js file
         new ExtractTextPlugin({
             //this is config used by module.rules for css|scss
-            filename: `[id]-[name]-[contenthash].css`
+            filename: `[id]-[name]-[contenthash:7].css`
         }),
 
 
@@ -117,7 +116,7 @@ module.exports = {
 
         new webpack.optimize.CommonsChunkPlugin({
             name: `shared`,
-            filename: `[id]-[name]-[chunkhash].js`,
+            filename: `[id]-[name]-[chunkhash:7].js`,
             chunks: [`app`],
             
             minChunks: (module) => {                

@@ -105,7 +105,7 @@ module.exports = {
             chunks: [`app`],
             
             minChunks: (module) => {                
-                console.log(`shared resource= ${module.resource} result=${module.context && module.context.indexOf(`shared`) !== -1}`);
+                //console.log(`shared resource= ${module.resource} result=${module.context && module.context.indexOf(`shared`) !== -1}`);
                 return module.context && module.context.indexOf(`shared`) !== -1;
             }
         }),        

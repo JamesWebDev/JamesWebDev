@@ -106,11 +106,11 @@ module.exports = {
             chunks: [`app`],
             
             minChunks: (module) => {                
-                console.log(`shared resource= ${module.resource} result=${module.context && module.context.indexOf(`shared`) !== -1}`);
+                //console.log(`shared resource= ${module.resource} result=${module.context && module.context.indexOf(`shared`) !== -1}`);
                 return module.context && module.context.indexOf(`shared`) !== -1;
             }
         }),
-        new webpack.optimize.CommonsChunkPlugin({name: 'meta', chunks: ['shared']}),
+        new webpack.optimize.CommonsChunkPlugin({name: 'manifest', chunks: ['shared']}),
         // prints more readable module names in the browser console on Hot Module Reload updates
         // Also, it helps to make output of file.[chunkhash].js fully static, since module id`s will be named instead of dynamically assigned integers.
         // and static output file names help keep client from downloading code they already have cached.

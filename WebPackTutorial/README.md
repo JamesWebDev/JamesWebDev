@@ -532,34 +532,35 @@ If you have ever been involved in the second deployment of a site written by new
 
 ### Example10a
 
-run this command `npm run example10a` 
+run this command `npm run example10a` notice all the files have the same hash. change anything in any of your bundled files and the hash of all your files change.
+This would be effective at cache busting, but may cause a degraded user experience if you have a large website since they will have to download all your content after every deployment.
 
 ### Example10b
 
-run this command 2 times `npm run example10b` notice the hash isn't changing.
+run this command `npm run example10b` and notice that each chunk has it's own hash. At first glance you might assume you have arrived at the desired outcome, but let's test that theory.
 
-now go and modify MiscSecondEntryPoint.ts, change the `console.log(y);` statment on line 6 to `console.log(x);` and then run `npm run example10b` again.
+Go and modify MiscSecondEntryPoint.ts, change the `console.log` statment on line 6 and then run `npm run example10b` again, and notice only [id]-misc-[chunkhash].js has changed, so far so good.
 
-* Notice, all of the file hashes have changed. If this was behaving the way we want, then only the [id]-misc-[chunkhash].js file in the dist folder that would have changed. This is a side effect of the webpack manifest.
+Now go to line 4 in page1.ts, and change one character and run `npm run example10b` again.
+
+* Notice, your app.js, shared.js, and app.css hashes have all changed. This is a side effect of the webpack manifest, and that before running CommonsChunkPlugin, and the ExtractTextPlugin they all started out as the app entry point.
 
 ### Example10c
 
-Run the command `npm run example10c` and take a look at the dist folder. It's not perfect but this is the first configuration that I would consider a reasonable solution for production hashing. 
+Run the command `npm run example10c` and take a look at the dist folder. It's not perfect but this is the first configuration that meets our goal of independent file hashes.
 
 I've added another instance of the CommonsChunkPlugin.
-The first instance processes the app entry point and creates a shared chunk, and the second instance processes the shared chunk. The result
+The first instance processes the app entry point and creates a shared chunk, and the second instance processes the new shared chunk. The reason for this second instance is that the last instance to run gets stuck with this line of code in the webpack header.
 
+```js
+/******/ script.src = __webpack_require__.p + "" + chunkId + "-" + chunkId + "-" + {"0":"c5cc4a4ec9b4b9fdaa02","1":"5dd341c1d664643bd52e"}[chunkId] + ".js";
+```
 
+This line contains the file hashes from the main app entry point, and the hash of the now extracted shared chunk. If we leave it in the shared chunk then the contents of the shared file changes when ever the app chunk's hash changes.
 
+* Note: keep in mind that the shared code example is a little contrived. In our finished config we are going to be using this same method to extract vendor files imported from node_modules into a seporate bundle and that keeping the vendor file hash static may save the client from having to wait while they download MB's of code they already had cached.
 
+Now go to line 4 in page1.ts, and change one character and run `npm run example10c` again. You will see 2 file names change. your app.js file, and your manifest.js file, while we are forcing them to download 1 extra 5.86 kB file, we are choosing to do that rather than a theoretical 10MB vendor file.
 
-
-
-
-
-
-
-
-
-
+### Example10d
 

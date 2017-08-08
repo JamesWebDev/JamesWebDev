@@ -1,7 +1,7 @@
 import AddTextToHtml from '../shared/AddTextToHtml';
 import {user,UserType} from '../shared/user';
 
-console.log('running page1.ts code now');
+console.log('running page1.ts code now.');
 
 AddTextToHtml('page1.ts says hello','PageOneDivOne');
 

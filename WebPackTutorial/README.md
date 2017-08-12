@@ -5,15 +5,15 @@
 - [Webpack Tutorial](#webpack-tutorial)
     - [Topics still to be written](#topics-still-to-be-written)
     - [System Setup](#system-setup)
-    - [Example1 Bundle Javascript](#example1-bundle-javascript)
-    - [Example2 bundle Javascript and Html](#example2-bundle-javascript-and-html)
-    - [Example3 transpile typescript](#example3-transpile-typescript)
-    - [Example4 Example of code reuse](#example4-example-of-code-reuse)
-    - [Example5 multiple entry points](#example5-multiple-entry-points)
-        - [Entry Points](#entry-points)
-    - [Example6 Using a file array as an entry point](#example6-using-a-file-array-as-an-entry-point)
+    - [Example1) Bundle Javascript](#example1-bundle-javascript)
+    - [Example2) Add index.html to bundle](#example2-add-indexhtml-to-bundle)
+    - [Example3) Add typescript transpile to build](#example3-add-typescript-transpile-to-build)
+    - [Example4) Code reusability](#example4-code-reusability)
+    - [Example5) Multiple entry points](#example5-multiple-entry-points)
+        - [Entry Points, what are they and how do they work](#entry-points-what-are-they-and-how-do-they-work)
+    - [Example6) Using a file array as an entry point](#example6-using-a-file-array-as-an-entry-point)
         - [File loading issues not solved by using a globbed file array](#file-loading-issues-not-solved-by-using-a-globbed-file-array)
-    - [Example7 Add css to your build process](#example7-add-css-to-your-build-process)
+    - [Example7) Add css to your build process](#example7-add-css-to-your-build-process)
     - [Example7b using ExtractTextPlugin to ouput a css file](#example7b-using-extracttextplugin-to-ouput-a-css-file)
     - [Example8 adding scss transpiling to the build](#example8-adding-scss-transpiling-to-the-build)
         - [scss common misunderstanding](#scss-common-misunderstanding)
@@ -26,7 +26,6 @@
         - [Example10d](#example10d)
 
 <!-- /TOC -->
-
 <!--
 //## Topics
 
@@ -47,30 +46,33 @@
 * [Why everyone needs file hashing](#why-everyone-needs-file-hashing)
 * [Understanding how webpack hashing works](#understanding-how-webpack-hashing-works)
 -->
+
 ## Topics still to be written
 
-* ~~Hashing file names~~
-  * ~~Pulling Vendor files into separate bundle~~
-  * ~~Preserving Vendor hash when local source files change (manifest)~~
-* Source Maps
-* Module Loaders
-  * babel
-  * html, and ng-cache-loader
-  * typescript
-  * fonts
-  * images
-* ~~Using older window/global js libraries~~
-  * Using js libraries not written as a module
-* Copying files without modifying/bundling/transpiling them
-* ~~Cleanup/removal of old build files~~
-* Uglify prod build
-* A fully functional angularjs, typescript, scss, webpack2 production ready example with images, fonts, using new and old sytle js libraries.
-* Cover differences in webpack when writing a js library vs a website.
+- ~~Hashing file names~~
+    - ~~Pulling Vendor files into separate bundle~~
+    - ~~Preserving Vendor hash when local source files change (manifest)~~
+- Source Maps
+- Module Loaders
+  - babel
+  - html, and ng-cache-loader
+  - typescript
+  - fonts
+  - images
+- ~~Using older window/global js libraries~~
+  - Using js libraries not written as a module
+- Copying files without modifying/bundling/transpiling them
+- ~~Cleanup/removal of old build files~~
+- Uglify prod build
+- A fully functional angularjs, typescript, scss, webpack2 production ready example; with images, fonts, using new and old sytle js libraries.
+- Cover differences in webpack when writing a js library vs a website.
 
 ## System Setup
 
-How to create this from Scratch, you need node >= 8 so that the package-lock.json file will be used.
-If you don't want to change you currently installed version, consider using nvm so you can have multiple versions.
+How to create this from Scratch, you need node >= 8 so that  
+the package-lock.json file will be used.
+If you don't want to change you currently installed version,  
+consider using nvm so you can have multiple versions.
 
 ```bash
 nvm install latest 64
@@ -189,7 +191,7 @@ run this command to see what yours are > npm ls -g --json --depth=0
 
 [back to beginning](#webpack-tutorial)
 
-## Example1 Bundle Javascript
+## Example1) Bundle Javascript
 
 ```bash
 npm run example1
@@ -203,25 +205,25 @@ webpack-dev-server --config=webpack.example1.js --open
 
 [back to beginning](#webpack-tutorial)
 
-## Example2 bundle Javascript and Html
+## Example2) Add index.html to bundle
 
-Remove the script tag from your html  
-and add the html-webpack-plugin to your project
+For this example I removed the script tag from the html  
+and added the html-webpack-plugin to the project
 
 ```bash
 npm install html-webpack-plugin --save-dev
 npm run example2
 ```
 
-* Note: Notice it is automatically adding a script tag for bundle.js to the index.html in your dist folder.
+- Notice it is automatically adding a script tag for bundle.js to the index.html in your dist folder.
 
-* Note:  Now when you edit either a js file or the index.html file, webpack-dev-server recompiles the modified modules, and refreshes the browser, no stopping compiling and restarting. This feature is functionally similar to the popular Browser-Sync package.
+- Now when you edit either a js file or the index.html file, webpack-dev-server recompiles the modified modules, and refreshes the browser, no stopping compiling and restarting. This feature is functionally similar to the popular Browser-Sync package.
 
-* Note: Notice that the webpack-dev-server is not pointed at the index.html file in your dist folder
+- Notice if you right click and view source; index.html is not loading content from your dist folder.
 
 [back to beginning](#webpack-tutorial)
 
-## Example3 transpile typescript
+## Example3) Add typescript transpile to build
 
 In this example we are going to switch our js files to ts files.
 
@@ -236,7 +238,7 @@ tsc init
 
 [back to beginning](#webpack-tutorial)
 
-## Example4 Example of code reuse
+## Example4) Code reusability
 
 ```bash
 npm run example4
@@ -266,7 +268,7 @@ You will also notice that I am importing the AddTextToHtml function, using types
 
 [back to beginning](#webpack-tutorial)
 
-## Example5 multiple entry points
+## Example5) Multiple entry points
 
 In this example we are going to add 2 things to our webpack config  
 
@@ -307,14 +309,14 @@ module.exports = {
 
 [back to beginning](#webpack-tutorial)
 
-### Entry Points
+### Entry Points, what are they and how do they work
 
-An entry point is a file or an array of files that after having gathered all dependencies should be bundled into one "chunk"
+An entry point is a file or an array of files that after having gathered all dependencies should be bundled into a "[Chunk](https://webpack.github.io/docs/code-splitting.html#chunk-types)"
 
 * If you look at the source code in example5 you can see that this isn't a SPA application, but rather it is a classic website in that each page is a separate html file running separate js. As a result these 3 files are fully isolated other than that they all use the files in the shared directory.
 * The app.ts file dosen't import page1.ts, or page2.ts, and vice versa.
 * When webpack builds the [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/) it looks for anything that is a url, whether it is an import/require statment, or image/file path and uses all of them to then generate a "chunk". Because app.ts/page1.ts/page2.ts arn't in eachothers dependency tree using any one of them as a single entry point would fail to build/bundle all of your source code. Their are 2.5 ways to solve this.
-  1. As in example5 you can have multiple entry points, webpack will walk each file tree separately, and you can then use CommonsChunkPlugin to pull shared resources into a common/sharable bundle. Without CommonsChunkPlugin the shared code would be duplicated in each each bundle file.
+  1. As in example5 you can have multiple entry points, webpack will walk each file tree separately, and you can then use the "[CommonsChunkPlugin](http://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin)" to pull shared resources into a common/sharable "[Normal Chunk](https://webpack.github.io/docs/code-splitting.html#normal-chunk)". Without the CommonsChunkPlugin the shared code would be duplicated for each each "[Entry Chunk](https://webpack.github.io/docs/code-splitting.html#entry-chunk)".
   1. You can use an array of files as your entry point. This would be my first choice in a SPA application
   1. For more complex websites do both. Have multiple entry points some or all of which are arrays of files.
 
@@ -322,7 +324,7 @@ Look for more about arrays as entry points in [Example6](#example6-using-a-file-
 
 [back to beginning](#webpack-tutorial)
 
-## Example6 Using a file array as an entry point
+## Example6) Using a file array as an entry point
 
 ```js
 //...
@@ -340,25 +342,28 @@ module.exports = {
 
 In this example we use node's file glob module to find all the ts files and then use them all as our entry point. This creates a single app bundle minus the shared code which we are still extracting into a separate bundle.
 
-The big advantage here is that we don't need to manually manage our entry points by hand anymore.
+The **big advantage** here is that we don't need to manually manage our entry points by hand anymore.
 If I add a new file to the project it will get picked up automatically with no need to modify the build process.
 
 ------------------------
+[back to beginning](#webpack-tutorial)
 
 ### File loading issues not solved by using a globbed file array
 
 Their are still two scenarios where you can get script loading and load order issues even though you are using typescript and webpack.
 
-* If you are accessing a global/ambient variable and you expect it to be in a certain state, but you haven't included the import of the file that would have put it in the desired state.
-  * Example1: In angularjs if you try to add a service to a module by calling something like this.  
+- If you are accessing a global/ambient variable and you expect it to be in a certain state, but you haven't included the import of the file that would have put it in the desired state.
+  - Example1: In angularjs if you try to add a service to a module by calling something like this.  
   `angular.module('app').service('MyApiCaller',MyApiCaller)`
-  It expects the module to have been initialized, but it references it via a string and not an object reference; as a result typescript dosen't realize the object is undefined. You can fix this one of 2 ways.
-    * (best option) You can import your app.module in your service. Every file should be importing all of it's dependencies so this would be the modern approach.
-    * You can have one master index.ts file that imports all of your files in the correct order like we use to have to do with script tags in html files.
-  * Example2: Angular routes you to a component but the component wasn't imported in your app.routes.ts file or your app.module.ts file. Typescript only warns you when you use an object you haven't imported, it dosen't know at what point angular is going to recognize your custom html element as being a thing, and a ng-controller attribute isn't a url so webpack's [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/) magic isn't going to factor in here either.
+  It expects the module to have been initialized, but it references it via a string and not an object reference; as a result typescript doesn't realize the object is undefined. **You can fix this one of 2 ways**.
+    - (best option) You can import your app.module in the `MyApiCaller` service. Every file should be importing all of it's dependencies so this would be the modern approach.
+    - You can have one master index.ts file that imports all of your files in the correct order (like we use to have to do with script tags in html files) and use it as your entry point
+  - Example2: Angular routes you to a component but you didn't import the component in your `app.routes.ts`, or `app.module.ts` file. Typescript only warns you when you use an object you haven't imported, it doesn't know at what point angular is going to recognize your custom html element as being a thing, and an ng-controller attribute isn't a url so webpack's [Dependency Graph](https://webpack.js.org/concepts/dependency-graph/) magic isn't going to factor in here either.
+    - Have `app.routes.ts` import anything that it routes to.
+    - Keep in mind angularjs [Dependency Injection (DI)](https://docs.angularjs.org/guide/di) handles in-memory dependencies and webpack handles file dependencies
 
-* If you are using a framework that checks/modifies global/window variables.
-  * Example: Angular checks to see if window.jQuery exists and then decides whether or not to use it's own jqlite. Webpack protects the global name space by wrapping each module in an IIFE which is great and avoids collisions, but means it won't see your imported jquery when it checks window for jQuery. Their is a simple solution, use webpack.ProvidePlugin this rewrites the usages of the global with the imported reference
+- If you are using a framework that checks/modifies global/window variables.
+  - Example: Angular checks to see if window.jQuery exists and then decides whether or not to use it's own jqlite. Webpack protects the global name space by wrapping each module in an [IIFE](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) which is great and avoids collisions, but means it won't see your imported jquery when it checks window for jQuery. Their is a simple solution, use webpack.ProvidePlugin this rewrites the usages of the global with the imported reference
 
 ```js
 //ProvidePlugin Automatically loads modules. Whenever the identifier is encountered as free variable in a module, the module is loaded automatically and the identifier is filled with the exports of the loaded module.
@@ -368,11 +373,12 @@ new webpack.ProvidePlugin({
     'window.jQuery':"jquery"
 }),
 ```
+- For more information about [shimming modules](https://webpack.github.io/docs/shimming-modules.html) in webpack
 
 ------------------------
 [back to beginning](#webpack-tutorial)
 
-## Example7 Add css to your build process
+## Example7) Add css to your build process
 
 First thing, we are going to add two new packages css-loader, and sytle-loader  
 `npm i -D css-loader`  

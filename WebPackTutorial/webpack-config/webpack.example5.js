@@ -94,5 +94,6 @@ module.exports = {
         contentBase: path.join(process.cwd(), "src/example5"),
         openPage: './src/example5/index.html',
         port: 3005
-    }
+    },
+    stats: {modules: false}
 }

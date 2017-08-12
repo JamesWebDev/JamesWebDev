@@ -33,5 +33,8 @@
     },
     "workbench.iconTheme": "vs-seti",
     "window.zoomLevel": 1,
-    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\cmd.exe"
+    
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\cmd.exe",
+    "terminal.integrated.shell.windows2": "C:\\Windows\\Sysnative\\bash.exe",
+    "terminal.integrated.shell.windows3": "C:\\WINDOWS\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe"
 }

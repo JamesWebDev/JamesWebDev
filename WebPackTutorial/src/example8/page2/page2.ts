@@ -3,6 +3,7 @@ import AddTextToHtml from '../shared/AddTextToHtml';
 import {user,UserType} from '../shared/user';
 import './page2.scss'
 
+
 console.log('running page2.ts code now');
 AddTextToHtml('page2.ts says goodbye','PageTwoDivOne');
  

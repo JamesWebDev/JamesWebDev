@@ -25,11 +25,11 @@
     "files.autoSaveDelay": 1500,
     "files.exclude": {
         "**/.git": false,
-        "**/.DS_Store": false,
-        "**/*.js.map": false,
-        "**/*.js": {
-            "when": "$(basename).ts"
-        }
+        "**/.DS_Store": false
+        //"**/*.js.map": false,
+        //"**/*.js": {
+            //"when": "$(basename).ts"
+        //}
     },
     "workbench.iconTheme": "vs-seti",
     "window.zoomLevel": 1,

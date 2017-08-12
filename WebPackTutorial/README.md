@@ -64,7 +64,7 @@
 - Copying files without modifying/bundling/transpiling them
 - ~~Cleanup/removal of old build files~~
 - Uglify prod build
-- A fully functional angularjs, typescript, scss, webpack2 production ready example; with images, fonts, using new and old sytle js libraries.
+- A fully functional angularjs, typescript, scss, webpack2 production ready example; with images, fonts, using new and old style js libraries.
 - Cover differences in webpack when writing a js library vs a website.
 
 ## System Setup
@@ -90,7 +90,7 @@ npm install webpack webpack-dev-server -g --save
 npm ls --json --depth=0
 ```
 
-For me npm ls's output looks like this.
+For me `npm ls --json --depth=0` output looks like this.
 
 ```json
 {
@@ -201,7 +201,7 @@ This npm script will run the following two commands
 webpack --config=webpack.example1.js  
 webpack-dev-server --config=webpack.example1.js --open  
 
-* Note: While the webpack-dev-server does host your files, with this simple setup you will have to restart the dev server inorder to see your file changes. The reason is that it recompiles in memory and dosen't write the file changes to disk, and your html page isn't pointing at it's in memory compile, but instead it points to the bundle.js file on the disk. The workaround would be to run "webpack --watch" in one console, and webpack-dev-server in a second console, at which point it would have been better to use a basic node express server with webpack in watch mode.
+* Note: While the webpack-dev-server does host your files, with this simple setup you will have to restart the dev server in order to see your file changes. The reason is that it recompiles in memory and doesn't write the file changes to disk, and your html page isn't pointing at it's in memory compile, but instead it points to the bundle.js file on the disk. The workaround would be to run "webpack --watch" in one console, and webpack-dev-server in a second console, at which point it would have been better to use a basic node express server with webpack in watch mode.
 
 [back to beginning](#webpack-tutorial)
 
@@ -219,7 +219,7 @@ npm run example2
 
 - Now when you edit either a js file or the index.html file, webpack-dev-server recompiles the modified modules, and refreshes the browser, no stopping compiling and restarting. This feature is functionally similar to the popular Browser-Sync package.
 
-- Notice if you right click and view source; index.html is not loading content from your dist folder.
+- Notice if you right click and view source, index.html is not loading content from your dist folder. It is now loading webpack-dev-server in memory compiled file. 😊
 
 [back to beginning](#webpack-tutorial)
 
@@ -234,7 +234,7 @@ npm install awesome-typescript-loader --save-dev
 tsc init
 ```
 
-* Note: Using windows 10, and nvm, you have to run "nvm on" at least once in your console or you'll get a "Please try running this command again as root/Administrator." error when installing typescript even if the console is already running as administrator ¯\\_(ツ)_/¯
+* Note: Using windows 10, npm, and nvm, you might have to run "nvm on" at least once in your console or get a permission error when running npm install. I got the error "Please try running this command again as root/Administrator." error when installing typescript even if the console is already running as administrator ¯\\_(ツ)_/¯
 
 [back to beginning](#webpack-tutorial)
 
@@ -244,7 +244,7 @@ tsc init
 npm run example4
 ```
 
-On each page we wan't to show a users display name.  
+For this example, on each page we want to show a users display name.  
 And we need to use this method to decide how to render their display name.
 
 ```typescript
@@ -264,7 +264,7 @@ And we need to use this method to decide how to render their display name.
 
 We don't want to have a copy of this code on every page. If the logic changes it increases the chance that we will fail to update the code somewhere, and adds complexity. If you look at the code in Example4 you can see that we are importing user, which is allowing us to share the same getDisplayName method on all pages.  
 
-You will also notice that I am importing the AddTextToHtml function, using typescript, and **without webpack** or requirejs or something similar I wouldn't have been able to reuse this function but would have had to recode it on every page.
+You will also notice that I am importing the AddTextToHtml function, using typescript, and **without webpack**, or requirejs, or something similar I would not have been able to reuse this function but would have had to have a copy of it on every page.
 
 [back to beginning](#webpack-tutorial)
 

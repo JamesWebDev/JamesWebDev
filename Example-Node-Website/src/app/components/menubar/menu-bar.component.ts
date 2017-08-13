@@ -1,7 +1,12 @@
 import * as angular from 'angular';
 import {WebClient} from 'exampleAppModule';
 
-
+export class MenuBarComponent implements angular.IComponentOptions {
+    static Name:string = 'menuBar';    
+    controller:angular.Injectable<angular.IControllerConstructor> = MenuBarController;
+    template:string = require('./menu-bar.component.html');
+    transclude:boolean = false;
+}
 export class MenuBarController implements angular.IController {
     static $inject: Array<string> = ['$log'];
     static Name = 'MenuBarComponent';
@@ -19,11 +24,4 @@ export class MenuBarController implements angular.IController {
         console.log(this);
     }
 }
-export class MenuBarComponent implements angular.IComponentOptions {
-    static Name:string = 'menuBar';    
-    controller:angular.Injectable<angular.IControllerConstructor> = MenuBarController;
-    template:string = require('./menu-bar.component.html');
-    transclude:boolean = false;
-}
-
 WebClient.appModule.component(MenuBarComponent.Name, new MenuBarComponent());

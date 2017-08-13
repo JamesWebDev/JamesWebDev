@@ -1,0 +1,23 @@
+@import "./components/helloworld/hello-world.component";
+body {
+    background-color:whitesmoke;
+}
+
+button {
+    background-color: white;    
+    border-color: #364b94;
+    border: solid;
+    border-width: 1px;
+    color: #364b94;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px !important;
+}
+button:hover{
+    background-color: #364b94;
+    color: white;
+    cursor: pointer;
+}

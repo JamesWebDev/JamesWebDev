@@ -1,0 +1,47 @@
+.helloWorldWrapper {
+    .scssCompileValidation{
+        background-color: green;
+        color:white;
+    }
+    .largeJpg{
+        background-color:orange;
+        background-image: url('assets/Images/WebDesign.jpg');
+        height: 1069px;
+        width: 1778px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .defaultImg{
+        background-color:green; 
+        background-image: url('assets/Images/default.png');
+        height: 128px;
+        width: 128px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .nodeSmall{
+        background-color:green;
+        background-image: url('assets/Images/node-small.png');
+        height: 128px;
+        width: 128px;
+        background-size: contain;
+        background-repeat: no-repeat;       
+    }   
+    .nodeMedium{
+        background-color:yellow;
+        background-image: url('assets/Images/node-medium.png');
+        height: 300px;
+        width: 600px;
+        background-size: contain;
+        background-repeat: no-repeat;       
+    } 
+    .nodeLarge{
+        background-color:Black;
+        color: white;
+        background-image: url('assets/Images/node-large.png');
+        height: 1129px;
+        width: 1843px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }          
+}

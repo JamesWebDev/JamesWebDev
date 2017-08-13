@@ -31,8 +31,10 @@ const globoptions = {
     ignore:"./simple-node-demo.ts"
 }
 let buildFiles = glob.sync("./**/*.ts", globoptions);
+buildFiles.push('./app/app.style.scss')
 //let indexFile = glob.sync("./index.ts", globoptions);
-//let styleFile = glob.sync("./core.module.scss", globoptions);
+//let styleFile = glob.sync("./app/app.style.scss", globoptions);
+//buildFiles.push(styleFile);
 let nodeDemoFile = glob.sync("./simple-node-demo.ts", {cwd:"./src"})
 
 

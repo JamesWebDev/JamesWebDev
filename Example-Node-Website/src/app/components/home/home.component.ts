@@ -1,7 +1,12 @@
 import * as angular from 'angular';
 import {WebClient} from 'exampleAppModule';
 
-
+export class HomeComponent implements angular.IComponentOptions {
+    static Name:string = 'home';    
+    controller:angular.Injectable<angular.IControllerConstructor> = HomeController;
+    template:string = require('./home.component.html');
+    transclude:boolean = false;
+}
 export class HomeController implements angular.IController {
     static $inject: Array<string> = ['$log'];
     static Name = 'HomeController';
@@ -19,11 +24,6 @@ export class HomeController implements angular.IController {
         console.log(this);
     }
 }
-export class HomeComponent implements angular.IComponentOptions {
-    static Name:string = 'home';    
-    controller:angular.Injectable<angular.IControllerConstructor> = HomeController;
-    template:string = require('./home.component.html');
-    transclude:boolean = false;
-}
+
 
 WebClient.appModule.component(HomeComponent.Name, new HomeComponent());

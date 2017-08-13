@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [ "es2015", "dom" ],
+    "outDir": "../src/example11/build",
+    "rootDir":"../src/example11/",
+    "baseUrl": "../src/example11/",
+    "sourceMap": true,
+    "moduleResolution": "node",    
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,  
+    "types":["node"], 
+    "typeRoots": ["../../node_modules/@types"],
+    "paths":{      
+      "*": [ "../node_modules/@types/*", "*"],
+      "exampleAppModule":["../../src/example11/app/app.module"]
+    }
+  },
+  "include": [
+    "../src/example11/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

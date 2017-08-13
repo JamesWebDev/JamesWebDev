@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import {appModule} from 'exampleAppModule';
+import {WebClient} from 'exampleAppModule';
 
 
 export class HomeController implements angular.IController {
@@ -26,4 +26,4 @@ export class HomeComponent implements angular.IComponentOptions {
     transclude:boolean = false;
 }
 
-appModule.component(HomeComponent.Name, new HomeComponent());
+WebClient.appModule.component(HomeComponent.Name, new HomeComponent());

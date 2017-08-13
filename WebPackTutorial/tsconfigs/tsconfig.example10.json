@@ -3,9 +3,9 @@
     "module": "commonjs",
     "target": "es5",
     "lib": [ "es2015", "dom" ],
-    "outDir": "build",
-    "rootDir":"example9/",
-    "baseUrl": "example9/",
+    "outDir": "../src/example10/build",
+    "rootDir":"../src/example10/",
+    "baseUrl": "../src/example10/",
     "sourceMap": true,
     "moduleResolution": "node",    
     "emitDecoratorMetadata": true,
@@ -15,6 +15,7 @@
     "preserveConstEnums": true,   
     "typeRoots": ["node_modules/@types"]    
   },
+
   "exclude": [
     "node_modules"
   ]

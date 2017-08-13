@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import {appModule} from 'exampleAppModule';
+import {WebClient} from 'exampleAppModule';
 
 
 export class MenuBarController implements angular.IController {
@@ -22,8 +22,8 @@ export class MenuBarController implements angular.IController {
 export class MenuBarComponent implements angular.IComponentOptions {
     static Name:string = 'menuBar';    
     controller:angular.Injectable<angular.IControllerConstructor> = MenuBarController;
-    template:string = require('./home.component.html');
+    template:string = require('./menu-bar.component.html');
     transclude:boolean = false;
 }
 
-appModule.component(MenuBarComponent.Name, new MenuBarComponent());
+WebClient.appModule.component(MenuBarComponent.Name, new MenuBarComponent());

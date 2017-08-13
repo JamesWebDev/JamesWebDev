@@ -9,7 +9,7 @@ const glob = require(`glob`);
 const ExtractTextPlugin = require(`extract-text-webpack-plugin`);
 
 const WebpackMd5Hash = require('webpack-md5-hash');
-const WebpackManifestPlugin = require('chunk-manifest-webpack-plugin');
+
 const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin');
 
 const exampleX = 'example10';
@@ -19,7 +19,8 @@ const globOptions = {
 const projectFiles = glob.sync(`./src/${exampleX}/**/*.ts`,globOptions);
 projectFiles.push(`./src/${exampleX}/app.scss`);
 
-
+console.log(projectFiles)
+console.log({configFileName: path.resolve(process.cwd(), `tsconfigs/tsconfig.${exampleX}.json`),compiler: `typescript`})
 
 module.exports = {
     entry: {
@@ -39,6 +40,7 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loader: `awesome-typescript-loader`,//faster than ts-loader, type checks on seporate thread
+                
                 exclude:[
                     path.resolve(process.cwd(), `node_modules`)
                 ]
@@ -88,7 +90,7 @@ module.exports = {
 
         //https://github.com/s-panferov/awesome-typescript-loader
         //If you want to use new paths and baseUrl feature of TS 2.0 please include TsConfigPathsPlugin
-        new TsConfigPathsPlugin({configFileName: `./tsconfig.${exampleX}.json`,compiler: `typescript`}),
+        new TsConfigPathsPlugin({configFileName: process.cwd()+`/tsconfigs/tsconfig.${exampleX}.json`,compiler: `typescript`}),
         //This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles.
         //this is especially useful for webpack bundles that include a file hash in the filename 
         //which changes every compilation. You can either let the plugin generate an HTML file 

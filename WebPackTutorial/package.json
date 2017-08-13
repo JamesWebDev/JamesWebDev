@@ -16,6 +16,7 @@
     "example4": "npm run example4:build & npm run example4:run",
     "example4:build": "webpack --config=webpack-config/webpack.example4.js",
     "example4:run": "webpack-dev-server --config=webpack-config/webpack.example4.js --open --progress --colors",
+    "example4b": "tsc -p ./tsconfigs/tsconfig.example4b.json",
     "example5": "npm run example5:build & npm run example5:run",
     "example5:build": "webpack --config=webpack-config/webpack.example5.js",
     "example5:run": "webpack-dev-server --config=webpack-config/webpack.example5.js --open --progress --colors",
@@ -41,7 +42,10 @@
     "example10c": "webpack  --config=webpack-config/webpack.example10c.js",
     "example10c:run": "webpack-dev-server --config=webpack-config/webpack.example10c.js --open --progress --colors",
     "example10d": "webpack  --config=webpack-config/webpack.example10d.js",
-    "example10d:run": "webpack-dev-server --config=webpack-config/webpack.example10d.js --open --progress --colors"
+    "example10d:run": "webpack-dev-server --config=webpack-config/webpack.example10d.js --open --progress --colors",
+    "example11": "npm run example11:build & npm run example11:run",
+    "example11:build": "webpack  --config=webpack-config/webpack.example11.js",
+    "example11:run": "webpack-dev-server --config=webpack-config/webpack.example11.js --open --progress --colors"
   },
   "keywords": [
     "Webpack2",
@@ -52,7 +56,6 @@
   "license": "ISC",
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.2",
-    "chunk-manifest-webpack-plugin": "^1.1.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -67,5 +70,16 @@
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-dev-server": "^2.7.1",
     "webpack-md5-hash": "0.0.5"
+  },
+  "dependencies": {
+    "@types/angular": "^1.6.28",
+    "@types/angular-material": "^1.1.53",
+    "@types/node": "^8.0.20",
+    "@uirouter/angularjs": "^1.0.5",
+    "angular": "^1.6.5",
+    "angular-animate": "^1.6.5",
+    "angular-aria": "^1.6.5",
+    "angular-material": "^1.1.4",
+    "angular-ui-router": "^1.0.3"
   }
 }

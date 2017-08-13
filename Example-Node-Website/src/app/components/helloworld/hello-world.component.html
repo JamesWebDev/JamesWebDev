@@ -1,0 +1,21 @@
+<div class="helloWorldWrapper"> 
+    <h1>Hello {{$ctrl.echo}}</h1>
+    <div>   test</div>
+    <div class="scssCompileValidation">this will be green if scss compiled and served</div>
+    </br>
+    
+    <button ng-click="$ctrl.imgClass = 'defaultImg'">Default Image</button>
+    <button ng-click="$ctrl.imgClass = 'nodeSmall'">Node Small</button>
+    <button ng-click="$ctrl.imgClass = 'nodeMedium'">Node Medium</button>
+    <button ng-click="$ctrl.imgClass = 'nodeLarge'">Node Large</button>
+    <button ng-click="$ctrl.imgClass = 'largeJpg'">Large Jpg</button>
+    </br>
+    </br>
+    <div ng-class="$ctrl.imgClass">
+        Div Should show a background image
+    </div>
+    <ps-example>    
+        
+    </ps-example>
+
+</div>

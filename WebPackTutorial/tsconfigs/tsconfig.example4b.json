@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "outFile": "../src/example4/tscBundle.js",
+    "module": "amd",
     "target": "es5",
     "lib": [ "es2015", "dom" ],
     "outDir": "../src/example4",

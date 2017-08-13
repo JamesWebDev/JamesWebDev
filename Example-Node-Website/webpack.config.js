@@ -7,6 +7,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackVisualizer = require('webpack-visualizer-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin');
+
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (['production','stage'].includes(env));
@@ -48,10 +51,7 @@ module.exports = {
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files
-        filename: '[name].js', //[name] == entrypoint name
-        libraryTarget:'umd',
-        library: "example-node-package", 
-        umdNamedDefine: true //Uses file names instead of numbers, making webpacked file more readable
+        filename: `[id]-[name]-[chunkhash:7].js`
     },     
     resolve: { 
         extensions: ['.ts','.js','.css', '.scss'],
@@ -138,12 +138,23 @@ module.exports = {
         ]    
     },         
     plugins: [
+        new WebpackMd5Hash(),
         new HtmlWebpackPlugin({
             template: path.resolve( SRCDIR, 'index.html' ),
             filename: 'index.html',
             chunksSortMode: 'dependency',
             inject: true
         }), 
+        new webpack.optimize.CommonsChunkPlugin({
+            name: `vendor`,
+            filename: `[id]-[name]-[chunkhash:7].js`,
+            chunks: [`client`],
+            
+            minChunks: (module) => {                
+                //console.log(`shared resource= ${module.resource} result=${module.context && module.context.indexOf(`shared`) !== -1}`);
+                return module.context && module.context.indexOf(`node_modules`) !== -1;
+            }
+        }),
         //https://github.com/s-panferov/awesome-typescript-loader
         //If you want to use new paths and baseUrl feature of TS 2.0 please include TsConfigPathsPlugin
         new TsConfigPathsPlugin({
@@ -166,14 +177,16 @@ module.exports = {
             ], 
             {copyUnmodified: false,debug:'warning'}
         ),
+        //This extracts the css into it`s own css file rather than bundling it in the app.js file
         new ExtractTextPlugin({
             //this is config used by module.rules for css|scss
-            filename: '[name].css'
+            filename: `[id]-[name]-[contenthash:7].css`
         }),
         //this can be used to force bundle to be 1 file, not sure if this is important though...
-        new webpack.optimize.LimitChunkCountPlugin({maxChunks:1}),
+        //new webpack.optimize.LimitChunkCountPlugin({maxChunks:1}),
         
-        new NamedModulesPlugin({root:"./src"}),
+        new NamedModulesPlugin(),
+        new InlineChunkManifestHtmlWebpackPlugin({dropAsset: true}),
         //is optional. Use it if you want async error reporting.
         // We need this plugin to detect a `--watch` mode. It may be removed later
         // after https://github.com/webpack/webpack/issues/3460 will be resolved.
@@ -198,9 +211,10 @@ module.exports = {
         compress: true, 
         contentBase: 'public',
         port: 2727,
-        historyApiFallback: true
+        historyApiFallback: true,
+        stats: { errorDetails: true,modules:false }
     },
-    stats: { errorDetails: true }
+    stats: { errorDetails: true,modules:false }
 }
 
 // if process.env.NODE_ENV === 'production' add Uglify to the array of plugins

@@ -1,9 +1,11 @@
 import * as angular from "angular";
 import 'angular-ui-router';
-import {appModule} from "exampleAppModule"
+import {WebClient} from "exampleAppModule"
 import * as home from './components/home/home.component';
 import * as exampleone from './components/exampleone/example-one.component';
 import * as exampletwo from './components/exampletwo/example-two.component';
+import * as helloworld from './components/helloworld/hello-world.component';
+
 export class AppRoutes {
     static $inject: string[] = [
         '$stateProvider',
@@ -21,43 +23,53 @@ export class AppRoutes {
                 url: '',
                 abstract: true,
                 views: {
-                    content : {
+                    shell : {
                         template: require('./app.layout.html'),
                     },
                 }
             })
             .state('app.home', {
                 name:home.HomeComponent.Name,
-                url: '/home',
-                component:home.HomeComponent.Name,
-                views:{
-                    content:{
-                        template:require('./components/home/home.view.html')
-                    }
+                url: '/home',                
+                views: {
+                    app : {
+                        component: home.HomeComponent.Name
+                    },
+                }
+                //component:home.HomeComponent.Name
+            })
+            .state('app.helloworld', {
+                name:helloworld.HelloWorldComponent.Name,
+                url: '/helloworld',
+                views: {
+                    app : {
+                        component: helloworld.HelloWorldComponent.Name
+                    },
                 }
             })
             .state('app.exampleone', {
                 name:exampleone.ExampleOneComponent.Name,
                 url: '/exampleone',
-                component:exampleone.ExampleOneComponent.Name,
-                views:{
-                    content:{
-                        template:require('./components/exampleone/example-one.view.html')
-                    }
+                views: {
+                    app:{
+                        component: exampleone.ExampleOneComponent.Name
+                    },
+                    /* content : {
+                        template: '<example-one></example-one>'
+                    }, */
                 }
             })
             .state('app.exampletwo', {
-                name:exampletwo.ExampleTwo.Name,
+                name:exampletwo.ExampleTwoComponent.Name,
                 url: '/exampletwo',
-                component:exampletwo.ExampleTwo.Name,
-                views:{
-                    content:{
-                        template:require('./components/exampletwo/example-two.view.html')
-                    }
+                views: {
+                    app : {
+                        component: exampletwo.ExampleTwoComponent.Name
+                    },
                 }
             });   
         $urlRouterProvider.otherwise('/home');
         $locationProvider.html5Mode(true);
     }
 }
-appModule.config(AppRoutes);
+WebClient.appModule.config(AppRoutes);

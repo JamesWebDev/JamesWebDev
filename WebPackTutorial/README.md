@@ -25,6 +25,7 @@
         - [Example10b](#example10b)
         - [Example10c](#example10c)
         - [Example10d The Ideal Hashing Solution](#example10d-the-ideal-hashing-solution)
+    - [Webpack examples from a functioning angularjs webpack website](#webpack-examples-from-a-functioning-angularjs-webpack-website)
     - [End](#end)
 
 <!-- /TOC -->
@@ -51,9 +52,6 @@
 
 ## Topics still to be written
 
-- ~~Hashing file names~~
-    - ~~Pulling Vendor files into separate bundle~~
-    - ~~Preserving Vendor hash when local source files change (manifest)~~
 - Source Maps
 - Module Loaders
   - babel
@@ -601,6 +599,9 @@ The **app.js** code is hashed after the css is extracted so that css changes don
 The WebpackMd5Hash plugin together with the InlineChunkManifestHtmlWebpackPlugin protect the **shared.js** from changes in the app.js bundle code.
 
 
+## Webpack examples from a functioning angularjs webpack website
+
+Examples continue [here](https://github.com/JamesWebDev/JamesWebDev/tree/master/Example-Node-Website), in a less trivial website. This project is written in typescript, angularjs, and built with webpack
 
 ## End
 [back to beginning](#webpack-tutorial)

@@ -1,5 +1,18 @@
 # Example Node Website
 
+<!-- TOC -->
+
+- [Example Node Website](#example-node-website)
+    - [Examples Still to be writen](#examples-still-to-be-writen)
+    - [Reducing your final bundle size.](#reducing-your-final-bundle-size)
+        - [Import only what you need](#import-only-what-you-need)
+        - [Tree Shaking, what it can and can't do.](#tree-shaking-what-it-can-and-cant-do)
+            - [Tree Shaking functions](#tree-shaking-functions)
+            - [Tree Shaking classes](#tree-shaking-classes)
+            - [Tree Shaking unimported classes](#tree-shaking-unimported-classes)
+
+<!-- /TOC -->
+
 - For a tutorial of the webpack basics, please take a look at the [WebPackTutorial](https://github.com/JamesWebDev/JamesWebDev/tree/master/WebPackTutorial) project also found in this repository.
 
 ## Examples Still to be writen
@@ -14,7 +27,7 @@
   - Using js libraries not written as a module
 - Copying files without modifying/bundling/transpiling them
 - ~~Cleanup/removal of old build files~~
-- Uglify prod build
+- ~~Uglify prod build~~
 - A fully functional angularjs, typescript, scss, webpack2 production ready example; with images, fonts, using new and old style js libraries.
 - Cover differences in webpack when writing a js library vs a website.
 
@@ -75,4 +88,4 @@ I didn't use a file glob to find all the ts files in the treeshaking folder, but
 
 Every file is responsible for importing everything it needs in order to run. But when creating a new file, we have to go and find the right file somewhere in the dependency graph that should be responsible for importing the new file. This isn't really a problem if you are building a new site, but is much more time consuming if you are retro fitting an older site.
 
-Also, this can be more problematic in angular where the only file that depends on the new file being in memory is an html template. For these scenario's we are going to have to wait for runtime errors rather than compile time errors inorder to catch our mistakes which is never preferable.
+Also, this can be more problematic in angular where the only file that depends on the new file being in memory is an **html template**. For these scenario's we are going to have to wait for runtime errors rather than compile time errors inorder to catch our mistakes which is never preferable.

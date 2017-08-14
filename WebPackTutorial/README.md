@@ -203,7 +203,7 @@ webpack-dev-server --config=webpack.example1.js --open
 
 * Note: While the webpack-dev-server does host your files, with this simple setup you will have to restart the dev server in order to see your file changes. The reason is that it recompiles in memory and doesn't write the file changes to disk, and your html page isn't pointing at it's in memory compile, but instead it points to the bundle.js file on the disk. The workaround would be to run "webpack --watch" in one console, and webpack-dev-server in a second console, at which point it would have been better to use a basic node express server with webpack in watch mode.
 
-![placeholder](https://thumbs.gfycat.com/InsistentParallelAgouti-size_restricted.gif)
+![ExampleOne](https://thumbs.gfycat.com/BetterTerrificCod-size_restricted.gif)
 
 [back to beginning](#webpack-tutorial)
 

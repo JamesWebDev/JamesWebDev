@@ -68,7 +68,7 @@ export class AppRoutes {
                     },
                 }
             });   
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/helloworld');
         $locationProvider.html5Mode(true);
     }
 }

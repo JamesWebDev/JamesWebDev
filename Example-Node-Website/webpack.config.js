@@ -9,11 +9,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackVisualizer = require('webpack-visualizer-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin');
-
+const  WebpackBundleSizeAnalyzerPlugin =require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const env = process.env.NODE_ENV || 'development';
+const isHot = process.env.HOT_MODULE || false;
 const isProd = (['production','stage'].includes(env));
-const isHot = (env === 'hot');
 const MakeUglifyJsReadable = true;
 console.log(`isProd = ${isProd}`);
 console.log(`isHot = ${isHot}`);
@@ -28,7 +29,10 @@ const DIST = path.resolve( __dirname, './dist' );
 
 const globoptions = {
     cwd:"./src",
-    ignore:"./simple-node-demo.ts"
+    ignore:[
+        "./simple-node-demo.ts",
+        "./treeshaking/**/*"
+    ]
 }
 let buildFiles = glob.sync("./**/*.ts", globoptions);
 buildFiles.push('./app/app.style.scss')
@@ -44,16 +48,17 @@ console.log(buildFiles)
 
 module.exports = {
     bail: true, //Report the first error as a hard error instead of tolerating it.
-    devtool: 'source-map',
+    devtool: isProd?false:'source-map',
     context: __dirname + "/src", //The base directory (absolute path!) for resolving the entry option. If output.pathinfo is set, the included pathinfo is shortened to this directory.
     entry:
     {
         "client": buildFiles,
-        "nodeDemo":nodeDemoFile
+        "nodeDemo":nodeDemoFile,
+        "treeshaking":"./treeshaking/PersonWhoReads.ts"
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files
-        filename: `[id]-[name]-[chunkhash:7].js`
+        filename: isHot?'[id]-[name]-[hash:7].js':`[id]-[name]-[chunkhash:7].js`
     },     
     resolve: { 
         extensions: ['.ts','.js','.css', '.scss'],
@@ -149,7 +154,7 @@ module.exports = {
         }), 
         new webpack.optimize.CommonsChunkPlugin({
             name: `vendor`,
-            filename: `[id]-[name]-[chunkhash:7].js`,
+            filename: isHot?`[id]-[name]-[hash:7].js`:`[id]-[name]-[chunkhash:7].js`,
             chunks: [`client`],
             
             minChunks: (module) => {                
@@ -197,7 +202,10 @@ module.exports = {
         //Use the exclude option if you want to keep files that are not webpack assets.
         //Basically it compares folder contents to emitted files, and removes old assets.        
         new WebpackCleanupPlugin({preview: false}),
-        new WebpackVisualizer({filename: '../WebpackVisualizer.html'})
+        
+        //new WebpackVisualizer({filename: '../WebpackVisualizer.html'}),
+        //new WebpackBundleSizeAnalyzerPlugin('../BundleSizeAnalyzerReport.txt'),
+        //new BundleAnalyzerPlugin()
     ],
     //Include polyfills or mocks for various node stuff
     node:
@@ -223,16 +231,19 @@ module.exports = {
 if (isProd) {
     //much slower build avoid when developing locally
     module.exports.plugins.push(        
-        new webpack.optimize.UglifyJsPlugin({
+        new webpack.optimize.UglifyJsPlugin({           
             compressor: {
                 warnings: true,
-                dead_code: true
+                unused: true, 
+                dead_code: true,
+                drop_debugger: true,
             },
             minimize: MakeUglifyJsReadable?false:true,
             sourceMap: MakeUglifyJsReadable?true:false,
-            mangle: false,
+            mangle: false,//MakeUglifyJsReadable?false:true,
             beautify: MakeUglifyJsReadable?true:false,
             preserveComments: MakeUglifyJsReadable?true:false
-        })
+            
+        })        
     );
 }

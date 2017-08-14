@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2015",
     "target": "es5",
     "lib": [ "es5", "dom" ],
     "outDir": "_testtsc",    
@@ -25,7 +25,11 @@
     "preserveConstEnums": true,
     "typeRoots": ["node_modules/@types"],
     "paths": {
-      "exampleAppModule":["./app/app.module.ts"]
+      "lodash/*": [
+        "node_modules/@types/lodash-es/*"
+      ],
+      "exampleAppModule":["./app/app.module.ts"],
+      "*": [ "../node_modules/@types/*", "*"]//This resolves an issues with @type resolution when running with npm linked packages
     }
   },  
   "include": [

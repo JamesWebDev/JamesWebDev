@@ -1,17 +1,18 @@
-//I haven't gotten this to work, but here it is for the future
 {
   "presets": [
-    ["env", {
-        "targets": {
-            "browsers": [
-                "Chrome >= 52",
-                "FireFox >= 44",
-                "Safari >= 7",
-                "Explorer 11",
-                "last 4 Edge versions"
-            ]
-        },
-        "useBuiltIns": true
+    ["env", {      
+      "targets": {        
+        "browsers": [
+          "ie >= 10",
+          "Chrome >= 52",
+          "FireFox >= 44",
+          "Safari >= 7",          
+          "last 4 Edge versions"
+        ]
+      },
+      "forceAllTransforms":true,
+      "useBuiltIns": true,
+      "debug": true
     }]
   ]
 }

@@ -1,0 +1,32 @@
+{
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "compilerOptions": {
+      "baseUrl": "../src",  
+      
+      "rootDirs":[
+        "../src",
+        "../node_modules/"
+      ], 
+      "outDir": "tscTestBuild",
+      "target": "es2015",
+      "module": "es2015",
+      "moduleResolution": "node",
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "typeRoots": ["../node_modules/@types"],
+      "paths": {
+        "exampleAppModule":["app/app.module.ts"]
+      }
+    },
+    //"files": ["../src/**/*"],
+    "include": [
+      "../src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+  }

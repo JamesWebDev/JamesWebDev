@@ -205,7 +205,7 @@ npm run example2
 
 - Notice if you right click and view source, index.html is not loading content from your dist folder. It is now loading webpack-dev-server in memory compiled file. 😊
 
-![Example2](https://thumbs.gfycat.com/MeaslyFaithfulAmurratsnake-size_restricted.gif)
+![Example2](https://cdn.rawgit.com/JamesWebDev/JamesWebDev/7362a47f/GifTutorials/ExampleTwoRunning.gif)
 
 [back to beginning](#webpack-tutorial)
 

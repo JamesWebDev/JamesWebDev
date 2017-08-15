@@ -265,6 +265,7 @@ tsc -p ./tsconfigs/tsconfig.example4b.json --module none
 src/example4/shared/user.ts(1,13): error TS1148: Cannot use
 imports, exports, or module augmentations when '--module' is 'none'.
 ```
+![Example4btsc](https://cdn.rawgit.com/JamesWebDev/JamesWebDev/98ed89e4/GifTutorials/Example4btsc.gif)
 
 [back to beginning](#webpack-tutorial)
 

@@ -252,6 +252,8 @@ We don't want to have a copy of this code on every page. If the logic changes it
 
 You will also notice that I am importing the AddTextToHtml function, using typescript, and **without webpack**, or requirejs, or something similar I would not have been able to reuse this function but would have had to have a copy of it on every page.
 
+![Example4Reuse](https://thumbs.gfycat.com/DependableInferiorAracari-size_restricted.gif)
+
 ### Why a module loader, or bundler is required
 
 try running `npm run example4b` and take a look at src/example4/tscBundle.js if you were to paste it into a browser console you would get the following error. `VM109:1 Uncaught ReferenceError: define is not defined at <anonymous>:1:1` This is because typescript wrapped up each file as an AMD module, and browsers don't have built in module loaders (yet).

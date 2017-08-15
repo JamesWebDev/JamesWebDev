@@ -18,7 +18,8 @@ module.exports = {
     devServer: {
         contentBase: path.join(process.cwd(), "src/example2"),
         openPage: './src/example2/index.html',
-        port: 3002
+        port: 3002,
+        stats: {modules: false}
     },
     stats: {modules: false}
 }

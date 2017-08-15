@@ -3,7 +3,6 @@
 <!-- TOC -->
 
 - [Webpack Tutorial](#webpack-tutorial)
-    - [Topics still to be written](#topics-still-to-be-written)
     - [System Setup](#system-setup)
     - [Example1) Bundle Javascript](#example1-bundle-javascript)
     - [Example2) Add index.html to bundle](#example2-add-indexhtml-to-bundle)
@@ -49,23 +48,6 @@
 * [Why everyone needs file hashing](#why-everyone-needs-file-hashing)
 * [Understanding how webpack hashing works](#understanding-how-webpack-hashing-works)
 -->
-
-## Topics still to be written
-
-- Source Maps
-- Module Loaders
-  - babel
-  - html, and ng-cache-loader
-  - typescript
-  - fonts
-  - images
-- ~~Using older window/global js libraries~~
-  - Using js libraries not written as a module
-- Copying files without modifying/bundling/transpiling them
-- ~~Cleanup/removal of old build files~~
-- Uglify prod build
-- A fully functional angularjs, typescript, scss, webpack2 production ready example; with images, fonts, using new and old style js libraries.
-- Cover differences in webpack when writing a js library vs a website.
 
 ## System Setup
 
@@ -222,6 +204,8 @@ npm run example2
 - Now when you edit either a js file or the index.html file, webpack-dev-server recompiles the modified modules, and refreshes the browser, no stopping compiling and restarting. This feature is functionally similar to the popular Browser-Sync package.
 
 - Notice if you right click and view source, index.html is not loading content from your dist folder. It is now loading webpack-dev-server in memory compiled file. 😊
+
+![Example2](https://thumbs.gfycat.com/MeaslyFaithfulAmurratsnake-size_restricted.gif)
 
 [back to beginning](#webpack-tutorial)
 

@@ -9,7 +9,7 @@
     "example1:run": "webpack-dev-server --config=webpack-config/webpack.example1.js --open --progress --colors",
     "example2": "npm run example2:build & npm run example2:run",
     "example2:build": "webpack --config=webpack-config/webpack.example2.js",
-    "example2:run": "webpack-dev-server --config=webpack-config/webpack.exa2.js --open --progress --colors --no-inline --no-hot",
+    "example2:run": "webpack-dev-server --config=webpack-config/webpack.example2.js --open --progress --colors --no-inline --no-hot",
     "example3": "npm run example3:build & npm run example3:run",
     "example3:build": "webpack --config=webpack-config/webpack.example3.js",
     "example3:run": "webpack-dev-server --config=webpack-config/webpack.example3.js --open --progress --colors",

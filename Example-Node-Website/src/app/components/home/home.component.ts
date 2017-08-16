@@ -24,6 +24,4 @@ export class HomeController implements angular.IController {
         console.log(this);
     }
 }
-
-
 WebClient.appModule.component(HomeComponent.Name, new HomeComponent());

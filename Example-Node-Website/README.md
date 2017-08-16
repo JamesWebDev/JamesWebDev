@@ -37,6 +37,7 @@
 
 When I `import _ from 'lodash'` it adds 526.94 KB unminified to the bundle. Doing this would be like adding `<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>` in a classically written website. Which is a huge over head if I was only planning on using 1 function from the library, like this for example.
 ```js
+import _ from 'lodash'
 var object = { 'a': [{ 'b': { 'c': 'lodash found this value for me' } }] };
 console.log(_.get(object, 'a[0].b.c'));
 ```

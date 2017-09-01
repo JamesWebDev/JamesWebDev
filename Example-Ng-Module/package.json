@@ -5,9 +5,9 @@
     "url": "https://github.com/JamesWebDev/JamesWebDev.git"
   },
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "an example of how to create an angular component to be imported into a website",
-  "main": "index.js",
+  "main": "dist/test-module.js",
   "scripts": {
     "pack": "cls&&webpack --config=webpack.config.js",
     "pack-prod": "set NODE_ENV=production&&cls&&webpack --config=webpack.config.js",

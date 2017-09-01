@@ -29,7 +29,7 @@ const globoptions = {
     ignore:"./simple-node-demo.ts"
 }
 //let buildFiles = glob.sync("./**/*.ts", globoptions);
-let indexFile = glob.sync("./index.ts", globoptions);
+let testComponent = glob.sync("./test.component.ts", globoptions);
 //let styleFile = glob.sync("./core.module.scss", globoptions);
 
 
@@ -39,12 +39,13 @@ let indexFile = glob.sync("./index.ts", globoptions);
 
 
 module.exports = {
+    externals: [NodeExternals()],
     bail: true, //Report the first error as a hard error instead of tolerating it.
     devtool: 'source-map',
     context: __dirname + "/src", //The base directory (absolute path!) for resolving the entry option. If output.pathinfo is set, the included pathinfo is shortened to this directory.
     entry:
     {
-        "index": indexFile
+        "test-module": testComponent
     }, 
     output:{
         path: path.resolve(__dirname, 'dist'), //defines where output drops the bundled files
@@ -143,12 +144,13 @@ module.exports = {
         ]    
     },         
     plugins: [
-        new HtmlWebpackPlugin({
+        
+/*         new HtmlWebpackPlugin({
             template: path.resolve( SRCDIR, 'index.html' ),
             filename: 'index.html',
             chunksSortMode: 'dependency',
             inject: true
-        }), 
+        }),  */
         //https://github.com/s-panferov/awesome-typescript-loader
         //If you want to use new paths and baseUrl feature of TS 2.0 please include TsConfigPathsPlugin
         new TsConfigPathsPlugin({

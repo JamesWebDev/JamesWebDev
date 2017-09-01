@@ -67,7 +67,17 @@ export class AppRoutes {
                         component: exampletwo.ExampleTwoComponent.Name
                     },
                 }
-            });   
+            })
+            .state('app.testone', {
+                name:'example-test-module',
+                url: '/testone',
+                views: {
+                    app : {
+                        component: "testOne"
+                    },
+                }
+            });
+            
         $urlRouterProvider.otherwise('/helloworld');
         $locationProvider.html5Mode(true);
     }

@@ -3,11 +3,14 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-aria';
 import 'angular-material';
+import '@jameswebdev/example-ng-module';
+
 export module WebClient {
   export const Name = 'exampleapp';
   angular.module(WebClient.Name, [
     'ui.router',
-    'ngMaterial'])
+    'ngMaterial',
+    'example-test-module'])
     .run(['$rootScope','$state',
     ($rootScope,$state)=>{
       console.log('app initialized')

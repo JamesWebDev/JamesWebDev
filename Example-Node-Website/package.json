@@ -67,6 +67,7 @@
     "webpack-node-externals": "latest"
   },
   "dependencies": {
+    "@jameswebdev/example-ng-module": "^1.0.3",
     "@jameswebdev/example-node-package": "^1.0.0",
     "@jameswebdev/ts": "^1.0.0",
     "angular": "latest",

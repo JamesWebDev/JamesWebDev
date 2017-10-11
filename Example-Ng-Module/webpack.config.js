@@ -76,7 +76,7 @@ module.exports = {
             {
                 test: /\.html$/,
                 exclude: /index\.html/,
-                loader: "ng-cache-loader?prefix=[dir]/[dir]"
+                loader: "ng-cache-loader?prefix=//"
             },
             {
                 test: /\.ts$/,

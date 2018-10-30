@@ -1,5 +1,5 @@
 import { WebClient } from 'exampleAppModule';
-var MenuBarComponent = (function () {
+var MenuBarComponent = /** @class */ (function () {
     function MenuBarComponent() {
         this.controller = MenuBarController;
         this.template = require('./menu-bar.component.html');
@@ -9,7 +9,7 @@ var MenuBarComponent = (function () {
     return MenuBarComponent;
 }());
 export { MenuBarComponent };
-var MenuBarController = (function () {
+var MenuBarController = /** @class */ (function () {
     function MenuBarController($log) {
         this.$log = $log;
         $log.info('HomeController Constructor Called');

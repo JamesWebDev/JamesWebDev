@@ -3,12 +3,14 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-aria';
 import 'angular-material';
+import '@jameswebdev/example-ng-module';
 export var WebClient;
 (function (WebClient) {
     WebClient.Name = 'exampleapp';
     angular.module(WebClient.Name, [
         'ui.router',
-        'ngMaterial'
+        'ngMaterial',
+        'example-test-module'
     ])
         .run(['$rootScope', '$state',
         function ($rootScope, $state) {

@@ -1,4 +1,4 @@
-var Paper = (function () {
+var Paper = /** @class */ (function () {
     function Paper() {
     }
     Paper.prototype.toString = function () {

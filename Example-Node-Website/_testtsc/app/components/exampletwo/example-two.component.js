@@ -1,5 +1,5 @@
 import { WebClient } from 'exampleAppModule';
-var ExampleTwoComponent = (function () {
+var ExampleTwoComponent = /** @class */ (function () {
     function ExampleTwoComponent() {
         this.controller = ExampleTwo;
         this.template = require('./example-Two.component.html');
@@ -9,7 +9,7 @@ var ExampleTwoComponent = (function () {
     return ExampleTwoComponent;
 }());
 export { ExampleTwoComponent };
-var ExampleTwo = (function () {
+var ExampleTwo = /** @class */ (function () {
     function ExampleTwo($log) {
         this.$log = $log;
         $log.info('ExampleTwo Constructor Called');

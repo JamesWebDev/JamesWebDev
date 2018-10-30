@@ -4,7 +4,7 @@ import * as home from './components/home/home.component';
 import * as exampleone from './components/exampleone/example-one.component';
 import * as exampletwo from './components/exampletwo/example-two.component';
 import * as helloworld from './components/helloworld/hello-world.component';
-var AppRoutes = (function () {
+var AppRoutes = /** @class */ (function () {
     function AppRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
         console.log('AppRoutes Constructor Called');
         $stateProvider
@@ -51,6 +51,15 @@ var AppRoutes = (function () {
             views: {
                 app: {
                     component: exampletwo.ExampleTwoComponent.Name
+                },
+            }
+        })
+            .state('app.testone', {
+            name: 'example-test-module',
+            url: '/testone',
+            views: {
+                app: {
+                    component: "testOne"
                 },
             }
         });

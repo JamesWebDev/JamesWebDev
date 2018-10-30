@@ -1,5 +1,5 @@
 import { WebClient } from 'exampleAppModule';
-var HomeComponent = (function () {
+var HomeComponent = /** @class */ (function () {
     function HomeComponent() {
         this.controller = HomeController;
         this.template = require('./home.component.html');
@@ -9,7 +9,7 @@ var HomeComponent = (function () {
     return HomeComponent;
 }());
 export { HomeComponent };
-var HomeController = (function () {
+var HomeController = /** @class */ (function () {
     function HomeController($log) {
         this.$log = $log;
         $log.info('HomeController Constructor Called');

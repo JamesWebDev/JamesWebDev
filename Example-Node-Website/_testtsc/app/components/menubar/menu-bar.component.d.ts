@@ -1,4 +1,3 @@
-/// <reference types="angular" />
 import * as angular from 'angular';
 export declare class MenuBarComponent implements angular.IComponentOptions {
     static Name: string;

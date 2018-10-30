@@ -1,5 +1,5 @@
 import { WebClient } from 'exampleAppModule';
-var ExampleOne = (function () {
+var ExampleOne = /** @class */ (function () {
     function ExampleOne($log) {
         this.$log = $log;
         $log.info('ExampleOne Constructor Called');
@@ -15,7 +15,7 @@ var ExampleOne = (function () {
     return ExampleOne;
 }());
 export { ExampleOne };
-var ExampleOneComponent = (function () {
+var ExampleOneComponent = /** @class */ (function () {
     function ExampleOneComponent() {
         this.controller = ExampleOne;
         this.template = require('./example-one.component.html');

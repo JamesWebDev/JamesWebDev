@@ -1,5 +1,5 @@
 import { WebClient } from 'exampleAppModule';
-var HelloWorldComponent = (function () {
+var HelloWorldComponent = /** @class */ (function () {
     function HelloWorldComponent() {
         this.controller = HelloWorldController;
         this.template = require('./hello-world.component.html');
@@ -9,7 +9,7 @@ var HelloWorldComponent = (function () {
     return HelloWorldComponent;
 }());
 export { HelloWorldComponent };
-var HelloWorldController = (function () {
+var HelloWorldController = /** @class */ (function () {
     function HelloWorldController($log) {
         this.$log = $log;
         $log.info('HelloWorld Constructor Called');

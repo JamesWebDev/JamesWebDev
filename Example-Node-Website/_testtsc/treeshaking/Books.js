@@ -1,4 +1,4 @@
-var Other = (function () {
+var Other = /** @class */ (function () {
     function Other() {
     }
     Other.prototype.toString = function () {

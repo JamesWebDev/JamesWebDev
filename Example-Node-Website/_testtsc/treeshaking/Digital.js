@@ -1,4 +1,4 @@
-var Digital = (function () {
+var Digital = /** @class */ (function () {
     function Digital() {
     }
     Digital.prototype.toString = function () {
@@ -7,7 +7,7 @@ var Digital = (function () {
     return Digital;
 }());
 export { Digital };
-var DeprecatedClassWeForgotToRemove = (function () {
+var DeprecatedClassWeForgotToRemove = /** @class */ (function () {
     function DeprecatedClassWeForgotToRemove() {
     }
     DeprecatedClassWeForgotToRemove.prototype.Hello = function () {

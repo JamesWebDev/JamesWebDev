@@ -1,6 +1,6 @@
 import { Other } from './Books';
 import { Digital } from './Digital';
-var PersonWhoReads = (function () {
+var PersonWhoReads = /** @class */ (function () {
     function PersonWhoReads(bookType) {
         this.bookType = bookType;
         new Other();
